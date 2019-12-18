@@ -51,7 +51,7 @@ class TestAdventOfCode(unittest.TestCase):
         self.assertEqual(outputIn5, [2808771])
 
     def testDaySix(self):
-        pass
+        print("Day Six - Part One: {0}".format(322508))
 
 
 if __name__ == '__main__':
