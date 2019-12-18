@@ -1,7 +1,7 @@
 from anytree import Node
 from anytree.exporter import JsonExporter
 from anytree.importer import JsonImporter
-from aoc2019.AocInput import d6Input
+from anytree.search import find
 
 
 def GetNode(entry):
@@ -62,3 +62,30 @@ def GetOrbitDepth(input):
     return depth
 
 
+def GetOrbitMinimalDistance(input, nodeName1, nodeName2):
+    orbit = ReadTree(input.copy(), "aoc2019/orbits.json", True, False)
+
+    node1 = find(orbit, filter_=lambda node: node.name == nodeName1)
+
+    distance = 0
+    parent = node1.parent
+    while True:
+        node2 = find(parent, filter_=lambda node: node.name == nodeName2)
+        if node2 is not None:
+            start = 0
+            for i in range(len(node1.path)):
+                if node1.path[i].name == parent.name:
+                    start = i
+                if node1.path[i].name == nodeName1:
+                    distance += i - start
+                    break
+
+            start = 0
+            for i in range(len(node2.path)):
+                if node2.path[i].name == parent.name:
+                    start = i
+                if node2.path[i].name == nodeName2:
+                    distance += i - start
+                    return distance - 2
+
+        parent = parent.parent

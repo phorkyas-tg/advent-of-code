@@ -55,6 +55,13 @@ class TestAdventOfCode(unittest.TestCase):
         print("Day Six - Part One: {0}".format(orbitDepth))
         self.assertEqual(orbitDepth, 322508)
 
+        orbitDist = GetOrbitMinimalDistance(d6Input, "YOU", "SAN")
+        print("Day Six - Part Two: {0}".format(orbitDist))
+        self.assertEqual(orbitDist, 496)
+
+    def testDaySeven(self):
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()
