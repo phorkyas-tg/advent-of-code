@@ -51,7 +51,9 @@ class TestAdventOfCode(unittest.TestCase):
         self.assertEqual(outputIn5, [2808771])
 
     def testDaySix(self):
-        print("Day Six - Part One: {0}".format(322508))
+        orbitDepth = GetOrbitDepth(d6Input)
+        print("Day Six - Part One: {0}".format(orbitDepth))
+        self.assertEqual(orbitDepth, 322508)
 
 
 if __name__ == '__main__':
