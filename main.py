@@ -60,7 +60,9 @@ class TestAdventOfCode(unittest.TestCase):
         self.assertEqual(orbitDist, 496)
 
     def testDaySeven(self):
-        pass
+        highestOutput = GetHightestOutput(d7Input)
+        print("Day Seven - Part One: {0}".format(highestOutput))
+        self.assertEqual(highestOutput, 13848)
 
 
 if __name__ == '__main__':

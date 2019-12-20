@@ -1,3 +1,6 @@
+from aoc2019.AocInput import d7Input
+
+
 def ReadParameter(commandString, input, i, offset):
     try:
         x = int(commandString[-2 - offset])
@@ -27,9 +30,10 @@ def ReadCommand(input, i):
     return opCode, a, b, c
 
 
-def IntCodeComputer(puzzleInput, inputParameter=1):
+def IntCodeComputer(puzzleInput, inputParameter=1, phaseSetting=None):
     i = 0
     output = []
+    phaseSetting = phaseSetting
 
     while i < len(puzzleInput):
         opCode, a, b, c = ReadCommand(puzzleInput, i)
@@ -48,7 +52,11 @@ def IntCodeComputer(puzzleInput, inputParameter=1):
             jump += 4
         # read input
         elif opCode == 3:
-            puzzleInput[puzzleInput[i + 1]] = inputParameter
+            if phaseSetting is not None:
+                puzzleInput[puzzleInput[i + 1]] = phaseSetting
+                phaseSetting = None
+            else:
+                puzzleInput[puzzleInput[i + 1]] = inputParameter
             jump += 2
         # write output
         elif opCode == 4:
@@ -101,3 +109,37 @@ def FindVerbNoun(input, outValue):
                     return (100 * noun) + verb
             except IndexError:
                 pass
+
+
+def GetUnusedPhaseSettings(phaseSettings):
+    unusedPhaseSettings = [0, 1, 2, 3, 4]
+    for phaseSetting in phaseSettings:
+        unusedPhaseSettings.remove(int(phaseSetting))
+    return unusedPhaseSettings
+
+
+def AmplifierRecursive(puzzleInput, input=0, phaseSettings=""):
+    results = []
+
+    unusedPhaseSettings = GetUnusedPhaseSettings(phaseSettings)
+
+    if not unusedPhaseSettings:
+        results.append((phaseSettings, input))
+        return results
+
+    for phaseSetting in unusedPhaseSettings:
+        output = IntCodeComputer(puzzleInput.copy(), input, phaseSetting)[1][0]
+        results += AmplifierRecursive(puzzleInput.copy(), output, phaseSettings + str(phaseSetting))
+
+    return results
+
+
+def GetHightestOutput(puzzleInput):
+    output = AmplifierRecursive(puzzleInput)
+
+    highestOutput = ('0', 0)
+    for entry in output:
+        if entry[1] > highestOutput[1]:
+            highestOutput = entry
+
+    return highestOutput[1]
