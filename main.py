@@ -64,6 +64,12 @@ class TestAdventOfCode(unittest.TestCase):
         print("Day Seven - Part One: {0}".format(highestOutput))
         self.assertEqual(highestOutput, 13848)
 
+    def testDayEighteen(self):
+        ms = MapSolver(d18Input)
+        steps = ms.Solve()
+        print("Day Eighteen - Part One: {0}".format(steps))
+        self.assertEqual(steps, 3962)
+
 
 if __name__ == '__main__':
     unittest.main()

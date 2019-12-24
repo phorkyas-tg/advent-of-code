@@ -1,7 +1,5 @@
 from enum import Enum
 import re
-import itertools
-from aoc2019.AocInput import d18Input
 
 
 class TILETYPE(Enum):
@@ -40,18 +38,36 @@ class Tile:
 
 
 class Map:
-    def __init__(self, puzzleInput, inventory=[]):
-        self.map = self.GenerateMap(puzzleInput)
-        self.inventory = inventory
+    def __init__(self, puzzleInput):
+        self.rows = len(puzzleInput)
+        self.colums = len(puzzleInput[0])
 
-    def GetInventory(self):
-        return self.inventory
+        self.map = self.GenerateMap(puzzleInput)
+        self.ReduceMap()
+
+    def ReduceMap(self):
+        reduced = True
+        while reduced:
+            reduced = False
+            for row in range(self.rows):
+                for col in range(self.colums):
+                    tile = self.map[row][col]
+                    if tile.GetType() not in (TILETYPE.WALL, TILETYPE.KEY, TILETYPE.ME):
+                        neighbourWalls = 0
+                        for direction in ["N", "E", "S", "W"]:
+                            if self.Go(tile.GetPosition(), direction).GetType() == TILETYPE.WALL:
+                                neighbourWalls += 1
+                        if neighbourWalls == 3:
+                            tile.SetType(TILETYPE.WALL)
+                            tile.SetData("#")
+                            reduced = True
 
     def GenerateMap(self, input):
         map = []
-        for row in range(len(input)):
+
+        for row in range(self.rows):
             rowList = []
-            for col in range(len(input[row])):
+            for col in range(self.colums):
                 char = input[row][col]
 
                 if char == "#":
@@ -73,8 +89,8 @@ class Map:
     def GetTilesByType(self, listOfTileType=None):
         tiles = []
 
-        for row in range(len(self.map)):
-            for col in range(len(self.map[row])):
+        for row in range(self.rows):
+            for col in range(self.colums):
                 if listOfTileType is None or self.map[row][col].GetType() in listOfTileType:
                     tiles.append(self.map[row][col])
         return tiles
@@ -103,44 +119,6 @@ class Map:
 
         raise KeyError
 
-    def CanOpenDoor(self, doorTile):
-        if doorTile.GetData().lower() in self.inventory:
-            return True
-        return False
-
-    def GetRoutesToTile(self, route, tilePosition):
-        results = []
-
-        for direction in ["N", "E", "S", "W"]:
-            nextStep = self.Go(route[-1], direction)
-            if nextStep.GetType() not in (TILETYPE.WALL, TILETYPE.UNKNOWN) and \
-                    nextStep.GetPosition() not in route:
-
-                newRoute = route.copy()
-                newRoute.append(nextStep.GetPosition())
-
-                if nextStep.GetPosition() == tilePosition:
-                    results.append(newRoute)
-                    return results
-
-                closedDoor = nextStep.GetType() == TILETYPE.DOOR and not self.CanOpenDoor(nextStep)
-                isKey = nextStep.GetType() == TILETYPE.KEY
-
-                if not closedDoor and not isKey:
-                    results += self.GetRoutesToTile(newRoute, tilePosition)
-
-        return results
-
-    def GetFastestRouteToTile(self, tile):
-        me = self.GetMyPositionTile()
-        route = [me.GetPosition()]
-
-        fastestRoute = []
-        for r in self.GetRoutesToTile(route, tile.GetPosition()):
-            if fastestRoute == [] or len(fastestRoute) > len(r):
-                fastestRoute = r
-        return fastestRoute
-
     def MoveToPosition(self, tilePosition):
         # first make my current position to a path tile
         me = self.GetMyPositionTile()
@@ -148,17 +126,15 @@ class Map:
         me.SetType(TILETYPE.PATH)
         # if new position is a key - put into inventory
         tile = self.map[tilePosition[0]][tilePosition[1]]
-        if tile.GetType() == TILETYPE.KEY:
-            self.inventory.append(tile.GetData())
         # now put me on this position
         tile.SetData("@")
         tile.SetType(TILETYPE.ME)
 
     def PrintMap(self):
         print()
-        for row in range(len(self.map)):
+        for row in range(self.rows):
             line = ""
-            for col in range(len(self.map[row])):
+            for col in range(self.colums):
                 line += self.map[row][col].GetData()
             print(line)
         print()
@@ -166,68 +142,122 @@ class Map:
 
     def ExportMap(self):
         mapData = []
-        for row in range(len(self.map)):
+        for row in range(self.rows):
             line = ""
-            for col in range(len(self.map[row])):
+            for col in range(self.colums):
                 line += self.map[row][col].GetData()
             mapData.append(line)
         return mapData
 
 
-def GetPossiblePaths(puzzleInput, path="", inventory=[], routes=[]):
-    results = []
+class MapSolver:
+    def __init__(self, puzzleInput):
+        self.map = Map(puzzleInput)
+        self.keys = self.map.GetTilesByType([TILETYPE.ME, TILETYPE.KEY])
+        self.keyNames = set([x.GetData() for x in self.keys])
+        self.keyPositions = set([x.GetPosition() for x in self.keys])
+        self.keyDistances = self.GetKeyDistances()
 
-    map = Map(puzzleInput.copy(), inventory)
-    keys = map.GetTilesByType([TILETYPE.KEY])
-    exportData = map.ExportMap()
+        self.bestPath = 1e8
 
-    if not keys:
-        pathLength = 0
-        for r in routes:
-            pathLength += len(r) - 1
-        results.append([path, pathLength, routes])
+    def GetKeyDistances(self):
+        keyDistances = {}
+        for key in self.keys:
+            keyDistances[key.GetData()] = self.SearchForKeys(key)
+        return keyDistances
+
+    def SearchForKeys(self, currentTile, route=None, doors=None, results=None):
+        if route is None:
+            route = [currentTile.GetPosition()]
+        if doors is None:
+            doors = []
+        if results is None:
+            results = {}
+
+        for direction in ["N", "E", "S", "W"]:
+            nextStep = self.map.Go(route[-1], direction)
+
+            if nextStep.GetType() != TILETYPE.WALL and nextStep.GetPosition() not in route:
+                newRoute = route.copy()
+                newRoute.append(nextStep.GetPosition())
+
+                if nextStep.GetType() in(TILETYPE.KEY, TILETYPE.ME):
+                    keyTwin = nextStep.GetData()
+                    routeLength = len(newRoute) - 1
+                    if keyTwin not in results or results[keyTwin][0] > routeLength:
+                        results[keyTwin] = [routeLength, newRoute, doors]
+
+                newDoors = doors.copy()
+                if nextStep.GetType() == TILETYPE.DOOR:
+                    newDoors.append(nextStep.GetData())
+
+                self.SearchForKeys(currentTile, newRoute, newDoors, results)
+
         return results
 
-    for key in keys:
-        route = map.GetFastestRouteToTile(key)
-        if route:
-            newRoutes = routes.copy()
-            newRoutes.append(route.copy())
-            newMap = Map(exportData, map.GetInventory().copy())
-            newMap.MoveToPosition(key.GetPosition())
+    def GetReachableKeys(self, currentTile, collectedKeys):
+        reachableKeys = {}
+        for key, path in self.keyDistances[currentTile.GetData()].items():
+            # if key is already collected
+            if key in collectedKeys:
+                continue
 
-            results += GetPossiblePaths(newMap.ExportMap(),
-                                        path+key.GetData(),
-                                        newMap.GetInventory().copy(),
-                                        newRoutes)
+            # if a uncollected key is on the way
+            uncollectedKeys = self.keyNames - set(collectedKeys)
+            intersections = set([self.map.map[i[0]][i[1]].GetData() for i in
+                                 self.keyPositions.intersection(set(path[1][1:-1]))])
+            if uncollectedKeys.intersection(intersections):
+                continue
 
-    return results
+            # if there are doors look if the required keys are available
+            isReachable = True
+            for door in path[2]:
+                if door.lower() not in collectedKeys:
+                    isReachable = False
+                    break
 
+            if isReachable:
+                reachableKeys[key] = path
+        return reachableKeys
 
-def GetFastestPath(puzzleInput):
-    possiblePaths = GetPossiblePaths(puzzleInput)
+    def CollectAllKeys(self, currentTile, collectedKeys, steps=0, known=None, result=None):
+        if result is None:
+            result = {}
+        if known is None:
+            known = {}
 
-    fastestPath = None
-    for path in possiblePaths:
-        if fastestPath is None or fastestPath[1] > path[1]:
-            fastestPath = path
-    return fastestPath
+        reachableKeys = self.GetReachableKeys(currentTile, collectedKeys)
 
+        for nextKey, nextPath in reachableKeys.items():
+            newCollectedKeys = collectedKeys.copy()
 
-if __name__ == '__main__':
-    test = [
-        "########################",
-        "#@..............ac.GI.b#",
-        "###d#e#f################",
-        "###A#B#C################",
-        "###g#h#i################",
-        "########################"]
+            stepCounter = steps
+            stepCounter += nextPath[0]
 
-    test2 = [
-        "#########",
-        "#b.A.@.a#",
-        "#########"]
+            if stepCounter >= self.bestPath:
+                continue
 
-    print(GetFastestPath(d18Input))
+            sNewCollectedKeys = tuple(sorted(newCollectedKeys) + [nextKey])
+            if sNewCollectedKeys in known:
+                if known[sNewCollectedKeys] <= stepCounter:
+                    continue
 
+            known[sNewCollectedKeys] = stepCounter
 
+            newCollectedKeys.append(nextKey)
+            if len(newCollectedKeys) == len(self.keys):
+                result[stepCounter] = newCollectedKeys
+                self.bestPath = stepCounter
+                continue
+
+            nextTilePosition = nextPath[1][-1]
+            nextTile = self.map.map[nextTilePosition[0]][nextTilePosition[1]]
+            self.CollectAllKeys(nextTile, newCollectedKeys, stepCounter, known, result)
+
+        return result
+
+    def Solve(self):
+        self.bestPath = 1e8
+        startTile = self.map.GetMyPositionTile()
+        self.CollectAllKeys(startTile, [startTile.GetData()])
+        return self.bestPath
