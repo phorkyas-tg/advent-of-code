@@ -64,6 +64,21 @@ class TestAdventOfCode(unittest.TestCase):
         print("Day Seven - Part One: {0}".format(highestOutput))
         self.assertEqual(highestOutput, 13848)
 
+    def testDayEight(self):
+        fewestZeros = GetFewestZeros(d8Input)
+        print("Day Eight - Part One: {0}".format(fewestZeros))
+        self.assertEqual(fewestZeros, 1360)
+
+        decodedImage = DecodeImage(d8Input)
+        print("Day Eight - Part Two: {0}".format(decodedImage))
+        self.assertEqual(decodedImage,
+                         ['#### ###  #  #  ##  ###  ',
+                          '#    #  # #  # #  # #  # ',
+                          '###  #  # #  # #  # #  # ',
+                          '#    ###  #  # #### ###  ',
+                          '#    #    #  # #  # # #  ',
+                          '#    #     ##  #  # #  # '])
+
     def testDayEighteen(self):
         ms = MapSolver(d18Input)
         steps = ms.Solve()

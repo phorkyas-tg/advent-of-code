@@ -6,3 +6,4 @@ from .CableIntersections import ReadIntersections, GetLowestManhattanDistance, \
 from .PasswordGenerator import DigitsBruteForce
 from .Orbits import GetOrbitDepth, GetOrbitMinimalDistance
 from .Map import MapSolver
+from .SpaceImageEncoding import GetFewestZeros, DecodeImage
