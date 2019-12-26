@@ -79,11 +79,16 @@ class TestAdventOfCode(unittest.TestCase):
                           '#    #    #  # #  # # #  ',
                           '#    #     ##  #  # #  # '])
 
-    def testDayEighteen(self):
-        ms = MapSolver(d18Input)
-        steps = ms.Solve()
-        print("Day Eighteen - Part One: {0}".format(steps))
-        self.assertEqual(steps, 3962)
+    def testDayTwelve(self):
+        totalEnergy = GetTotalEnergy(d12Input)
+        print("Day Twelve - Part One: {0}".format(totalEnergy))
+        self.assertEqual(totalEnergy, 8538)
+
+    # def testDayEighteen(self):
+    #     ms = MapSolver(d18Input)
+    #     steps = ms.Solve()
+    #     print("Day Eighteen - Part One: {0}".format(steps))
+    #     self.assertEqual(steps, 3962)
 
 
 if __name__ == '__main__':
