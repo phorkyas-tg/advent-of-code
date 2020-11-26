@@ -2,7 +2,7 @@ import unittest
 from aoc2019 import *
 
 
-class TestAdventOfCode(unittest.TestCase):
+class TestAdventOfCode2019(unittest.TestCase):
 
     def testDayOne(self):
         sumOfFuelRequirements = GetSumOfFuel(d1Input.copy())
@@ -84,11 +84,12 @@ class TestAdventOfCode(unittest.TestCase):
         print("Day Twelve - Part One: {0}".format(totalEnergy))
         self.assertEqual(totalEnergy, 8538)
 
-    # def testDayEighteen(self):
-    #     ms = MapSolver(d18Input)
-    #     steps = ms.Solve()
-    #     print("Day Eighteen - Part One: {0}".format(steps))
-    #     self.assertEqual(steps, 3962)
+    def testDayEighteen(self):
+        self.skipTest("takes a long time")
+        ms = MapSolver(d18Input)
+        steps = ms.Solve()
+        print("Day Eighteen - Part One: {0}".format(steps))
+        self.assertEqual(steps, 3962)
 
 
 if __name__ == '__main__':
