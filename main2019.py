@@ -1,8 +1,10 @@
 import unittest
+
+from AOCBase import TestAdventOfCode
 from aoc2019 import *
 
 
-class TestAdventOfCode2019(unittest.TestCase):
+class TestAdventOfCode2019(TestAdventOfCode):
 
     def testDayOne(self):
         sumOfFuelRequirements = GetSumOfFuel(d1Input.copy())
