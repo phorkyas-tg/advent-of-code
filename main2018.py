@@ -1,10 +1,10 @@
 import unittest
 
-from AOCBase import TestAdventOfCode
+from AOCBase import AOCTestCases
 from aoc2018 import *
 
 
-class TestAdventOfCode2018(TestAdventOfCode):
+class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
 
     def testDayOne(self):
         frequency = CalculateFrequency(d1Input.copy())
@@ -23,6 +23,15 @@ class TestAdventOfCode2018(TestAdventOfCode):
         commonChars = GetCommonCharsFromIds(d2Input.copy())
         print("Day Two - Part Two: {0}".format(commonChars))
         self.assertEqual(commonChars, "rteotyxzbodglnpkudawhijsc")
+
+    def testDayThree(self):
+        multipleClaimedSquares = GetMultipleClaimedSquares(d3Input.copy())
+        print("Day Three - Part One: {0}".format(multipleClaimedSquares))
+        self.assertEqual(multipleClaimedSquares, 108961)
+
+        ClaimedId = GetIntactClaimId(d3Input.copy())
+        print("Day Three - Part Two: {0}".format(ClaimedId))
+        self.assertEqual(ClaimedId, 681)
 
 
 if __name__ == '__main__':
