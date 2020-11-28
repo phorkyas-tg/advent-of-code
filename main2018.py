@@ -33,6 +33,31 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Three - Part Two: {0}".format(ClaimedId))
         self.assertEqual(ClaimedId, 681)
 
+    def testDayFour(self):
+        guardSchedule = GenerateGuardSchedule(d4Input.copy())
+        st1 = CalculateStrategyOne(guardSchedule)
+        print("Day Four - Part One: {0}".format(st1))
+        self.assertEqual(st1, 35184)
+
+        st2 = CalculateStrategyTwo(guardSchedule)
+        print("Day Four - Part Two: {0}".format(st2))
+        self.assertEqual(st2, 37886)
+
+    def testDayFive(self):
+        lenAfterReactions = CalculateLenAfterReactions("{:s}".format(d5Input))
+        print("Day Five - Part One: {0}".format(lenAfterReactions))
+        self.assertEqual(lenAfterReactions, 9526)
+
+        lenAfterImprovement = GetShortestPolymerAfterImprovement("{:s}".format(d5Input))
+        print("Day Five - Part Two: {0}".format(lenAfterImprovement))
+        self.assertEqual(lenAfterImprovement, 6694)
+
+    def testDaySeven(self):
+        stepDict = GenerateStepDict(d7Input.copy())
+        stepExecution = CalculateStepOrder(stepDict)
+        print("Day Seven - Part One: {0}".format(stepExecution))
+        self.assertEqual(stepExecution, "AHJDBEMNFQUPVXGCTYLWZKSROI")
+
 
 if __name__ == '__main__':
     unittest.main()

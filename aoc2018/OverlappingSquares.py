@@ -11,7 +11,7 @@ def GenerateEmptyCanvas(width, height):
     return canvas
 
 
-def DecodeRectangleString(rectangeString):
+def ParseRectangleString(rectangeString):
     subStrings = re.findall(r"[\d']+", rectangeString)
     id = int(subStrings[0])
     xPos = int(subStrings[1])
@@ -22,7 +22,7 @@ def DecodeRectangleString(rectangeString):
 
 
 def AddRectangleToCanvas(canvas, rectangeString):
-    id, xPos, yPos, width, height = DecodeRectangleString(rectangeString)
+    id, xPos, yPos, width, height = ParseRectangleString(rectangeString)
 
     for i1 in range(xPos, xPos + width):
         for i2 in range(yPos, yPos + height):
@@ -56,7 +56,7 @@ def GetIntactClaimId(input):
                 multipleClaimedSquares[e] = e
 
     for rectangeString in input:
-        id, xPos, yPos, width, height = DecodeRectangleString(rectangeString)
+        id, xPos, yPos, width, height = ParseRectangleString(rectangeString)
         if id not in multipleClaimedSquares:
             return id
 
