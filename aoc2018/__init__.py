@@ -5,4 +5,5 @@ from .HammingDistance import GetCommonCharsFromIds
 from .OverlappingSquares import GetMultipleClaimedSquares, GetIntactClaimId
 from .GuardSchedule import GenerateGuardSchedule, CalculateStrategyOne, CalculateStrategyTwo
 from .PolymerScanner import CalculateLenAfterReactions, GetShortestPolymerAfterImprovement
-from .StepOrder import GenerateStepDict, CalculateStepOrder
+from .StepOrder import GenerateStepDict, CalculateStepOrder, CalculateWorkerTime
+from .MapSolver import CalculateBattleOutcome

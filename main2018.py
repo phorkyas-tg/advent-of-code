@@ -58,6 +58,57 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Seven - Part One: {0}".format(stepExecution))
         self.assertEqual(stepExecution, "AHJDBEMNFQUPVXGCTYLWZKSROI")
 
+        seconds = CalculateWorkerTime(stepDict, 5)
+        print("Day Seven - Part Two: {0}".format(seconds))
+        self.assertEqual(seconds, 1031)
+
+    def testDayFifteen(self):
+        test1 = ["#######",
+                 "#.G...#",
+                 "#...EG#",
+                 "#.#.#G#",
+                 "#..G#E#",
+                 "#.....#",
+                 "#######"]
+
+        test2 = ["#######",
+                 "#G..#E#",
+                 "#E#E.E#",
+                 "#G.##.#",
+                 "#...#E#",
+                 "#...E.#",
+                 "#######"]
+
+        test3 = ["#######",
+                 "#E.G#.#",
+                 "#.#G..#",
+                 "#G.#.G#",
+                 "#G..#.#",
+                 "#...E.#",
+                 "#######"]
+
+        test4 = ["#######",
+                 "#.E...#",
+                 "#.#..G#",
+                 "#.###.#",
+                 "#E#G#G#",
+                 "#...#G#",
+                 "#######"]
+
+        test5 = ["#########",
+                 "#G......#",
+                 "#.E.#...#",
+                 "#..##..G#",
+                 "#...##..#",
+                 "#...#...#",
+                 "#.G...G.#",
+                 "#.....G.#",
+                 "#########"]
+
+        battleOutcome = CalculateBattleOutcome(d15Input.copy(), log=False)
+        print("Day Fifteen - Part One: {0}".format(battleOutcome))
+        self.assertEqual(battleOutcome, 228730)
+
 
 if __name__ == '__main__':
     unittest.main()
