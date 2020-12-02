@@ -52,6 +52,18 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Five - Part Two: {0}".format(lenAfterImprovement))
         self.assertEqual(lenAfterImprovement, 6694)
 
+    def testDaySix(self):
+        largestArea = GetLargestFiniteArea(d6Test1.copy())
+        self.assertEqual(largestArea, 17)
+
+        largestArea = GetLargestFiniteArea(d6Input.copy())
+        print("Day Six - Part One: {0}".format(largestArea))
+        self.assertEqual(largestArea, 4290)
+
+        # lenAfterImprovement = GetShortestPolymerAfterImprovement("{:s}".format(d5Input))
+        # print("Day Six - Part Two: {0}".format(lenAfterImprovement))
+        # self.assertEqual(lenAfterImprovement, 6694)
+
     def testDaySeven(self):
         stepDict = GenerateStepDict(d7Input.copy())
         stepExecution = CalculateStepOrder(stepDict)
@@ -63,52 +75,38 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         self.assertEqual(seconds, 1031)
 
     def testDayFifteen(self):
-        test1 = ["#######",
-                 "#.G...#",
-                 "#...EG#",
-                 "#.#.#G#",
-                 "#..G#E#",
-                 "#.....#",
-                 "#######"]
-
-        test2 = ["#######",
-                 "#G..#E#",
-                 "#E#E.E#",
-                 "#G.##.#",
-                 "#...#E#",
-                 "#...E.#",
-                 "#######"]
-
-        test3 = ["#######",
-                 "#E.G#.#",
-                 "#.#G..#",
-                 "#G.#.G#",
-                 "#G..#.#",
-                 "#...E.#",
-                 "#######"]
-
-        test4 = ["#######",
-                 "#.E...#",
-                 "#.#..G#",
-                 "#.###.#",
-                 "#E#G#G#",
-                 "#...#G#",
-                 "#######"]
-
-        test5 = ["#########",
-                 "#G......#",
-                 "#.E.#...#",
-                 "#..##..G#",
-                 "#...##..#",
-                 "#...#...#",
-                 "#.G...G.#",
-                 "#.....G.#",
-                 "#########"]
+        battleOutcome = CalculateBattleOutcome(d15test1.copy(), log=False)
+        self.assertEqual(battleOutcome, 27730)
+        battleOutcome = CalculateBattleOutcome(d15test2.copy(), log=False)
+        self.assertEqual(battleOutcome, 36334)
+        battleOutcome = CalculateBattleOutcome(d15test3.copy(), log=False)
+        self.assertEqual(battleOutcome, 39514)
+        battleOutcome = CalculateBattleOutcome(d15test4.copy(), log=False)
+        self.assertEqual(battleOutcome, 27755)
+        battleOutcome = CalculateBattleOutcome(d15test5.copy(), log=False)
+        self.assertEqual(battleOutcome, 28944)
+        battleOutcome = CalculateBattleOutcome(d15test6.copy(), log=False)
+        self.assertEqual(battleOutcome, 18740)
 
         battleOutcome = CalculateBattleOutcome(d15Input.copy(), log=False)
         print("Day Fifteen - Part One: {0}".format(battleOutcome))
         self.assertEqual(battleOutcome, 228730)
 
+        battleOutcome = BattleTillElfsWin(d15test1.copy(), log=False)
+        self.assertEqual(battleOutcome, 4988)
+        battleOutcome = BattleTillElfsWin(d15test2.copy(), log=False)
+        self.assertEqual(battleOutcome, 29064)
+        battleOutcome = BattleTillElfsWin(d15test3.copy(), log=False)
+        self.assertEqual(battleOutcome, 31284)
+        battleOutcome = BattleTillElfsWin(d15test4.copy(), log=False)
+        self.assertEqual(battleOutcome, 3478)
+        battleOutcome = BattleTillElfsWin(d15test5.copy(), log=False)
+        self.assertEqual(battleOutcome, 6474)
+        battleOutcome = BattleTillElfsWin(d15test6.copy(), log=False)
+        self.assertEqual(battleOutcome, 1140)
+        battleOutcome = BattleTillElfsWin(d15Input.copy(), log=False)
+        print("Day Fifteen - Part Two: {0}".format(battleOutcome))
+        self.assertEqual(battleOutcome, 33621)
 
 if __name__ == '__main__':
     unittest.main()
