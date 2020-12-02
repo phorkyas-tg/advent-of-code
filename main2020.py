@@ -15,6 +15,15 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day One - Part Two: {0}".format(multEntries))
         self.assertEqual(multEntries, 295086480)
 
+    def testDayTwo(self):
+        validPasswords = CheckValidPasswords(d2Input.copy())
+        print("Day Two - Part One: {0}".format(validPasswords))
+        self.assertEqual(validPasswords, 524)
+
+        validPasswords = CheckValidPasswordsAdvanced(d2Input.copy())
+        print("Day Two - Part Two: {0}".format(validPasswords))
+        self.assertEqual(validPasswords, 485)
+
 
 if __name__ == '__main__':
     unittest.main()
