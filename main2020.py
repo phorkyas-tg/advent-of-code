@@ -24,6 +24,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Two - Part Two: {0}".format(validPasswords))
         self.assertEqual(validPasswords, 485)
 
+    def testDayThree(self):
+        countTrees = CountTreesWhileTraversing(d3Test1.copy())
+        self.assertEqual(countTrees, 7)
+
+        countTrees = CountTreesWhileTraversing(d3Input.copy())
+        print("Day Three - Part One: {0}".format(countTrees))
+        self.assertEqual(countTrees, 274)
+
+        countTrees = CountMultipleSlopes(d3Test1.copy())
+        self.assertEqual(countTrees, 336)
+
+        countTrees = CountMultipleSlopes(d3Input.copy())
+        print("Day Three - Part Two: {0}".format(countTrees))
+        self.assertEqual(countTrees, 6050183040)
+
 
 if __name__ == '__main__':
     unittest.main()
