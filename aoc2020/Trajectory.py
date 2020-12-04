@@ -1,14 +1,25 @@
-def CountTreesWhileTraversing(mapInput, right=3, down=1):
-    objects = {"#": 0, ".": 0}
+def CountObjectsWhileTraversing(mapInput, right=3, down=1):
+    objects = {}
     lineWidth = len(mapInput[0])
 
-    for i in range(down, len(mapInput), down):
-        step = int((i / down) * right)
+    # start is (0, 0)
+    # always skip 'down' lines
+    for i in range(0, len(mapInput), down):
+        # normalise right step
+        rightStep = int((i / down) * right)
         line = mapInput[i]
-        stepSize = (step % lineWidth)
-        objects[line[stepSize]] += 1
+        # modulo for step size so that there is no overflow
+        stepSize = rightStep % lineWidth
 
-    return objects["#"]
+        char = line[stepSize]
+        objects.setdefault(char, 0)
+        objects[char] += 1
+
+    return objects
+
+
+def CountTreesWhileTraversing(mapInput, right=3, down=1):
+    return CountObjectsWhileTraversing(mapInput, right, down)["#"]
 
 
 def CountMultipleSlopes(mapinput):

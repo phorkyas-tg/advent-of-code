@@ -39,6 +39,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Three - Part Two: {0}".format(countTrees))
         self.assertEqual(countTrees, 6050183040)
 
+    def testDayFour(self):
+        validPasscodes = CountValidPassports(d4Input.copy())
+        print("Day Four - Part One: {0}".format(validPasscodes))
+        self.assertEqual(validPasscodes, 222)
+
+        validPasscodes = CountValidPassportsAdvanced(d4Test1.copy())
+        self.assertEqual(validPasscodes, 0)
+
+        validPasscodes = CountValidPassportsAdvanced(d4Test2.copy())
+        self.assertEqual(validPasscodes, 4)
+
+        validPasscodes = CountValidPassportsAdvanced(d4Input.copy())
+        print("Day Four - Part Two: {0}".format(validPasscodes))
+        self.assertEqual(validPasscodes, 140)
+
 
 if __name__ == '__main__':
     unittest.main()
