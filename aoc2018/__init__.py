@@ -7,4 +7,4 @@ from .GuardSchedule import GenerateGuardSchedule, CalculateStrategyOne, Calculat
 from .PolymerScanner import CalculateLenAfterReactions, GetShortestPolymerAfterImprovement
 from .StepOrder import GenerateStepDict, CalculateStepOrder, CalculateWorkerTime
 from .BattleMapSolver import CalculateBattleOutcome, BattleTillElfsWin
-from .ManhattanArea import GetLargestFiniteArea
+from .ManhattanArea import GetLargestFiniteArea, GetLargestAreaWithManhattanDistance

@@ -100,11 +100,16 @@ class BattleMap(Map):
         bestMove = None
         for i in range(len(possiblePaths)):
             nextMove = possiblePaths[i][1]
-            if bestMove is None or self.HasHigherPrio(nextMove, bestMove):
+            if bestMove is None or self.IsHigherPrioPos(nextMove, bestMove):
                 bestMove = nextMove
         return bestMove
 
-    def HasHigherPrio(self, pos1, pos2):
+    def IsHigherPrioPath(self, path1, path2):
+        pos1 = path1[1]
+        pos2 = path2[1]
+        return self.IsHigherPrioPos(pos1, pos2)
+
+    def IsHigherPrioPos(self, pos1, pos2):
         if (pos1[1] < pos2[1]) or (pos1[1] == pos2[1] and pos1[0] < pos2[0]):
             return True
         return False

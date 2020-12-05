@@ -141,7 +141,10 @@ class Map:
             print("[{0}] {1} --> {2}".format(self.mapObjects[destId].GetObjectName(),
                                              startPos, destPos))
 
-    def HasHigherPrio(self, pos1, pos2):
+    def IsHigherPrioPath(self, path1, path2):
+        return False
+
+    def IsHigherPrioPos(self, pos1, pos2):
         return False
 
     def GetShortestPathsToMultipleTiles(self, currentPosition, destinationTiles):
@@ -188,7 +191,7 @@ class Map:
                 for i in range(len(visitedPathsTemp)):
                     if visitedPathsTemp[i][-1] == newRoute[-1]:
                         # check if this path has a higher priority - Overwrite this function
-                        if self.HasHigherPrio(newRoute[1], visitedPathsTemp[i][1]):
+                        if self.IsHigherPrioPath(newRoute, visitedPathsTemp[i]):
                             visitedPathsTemp[i] = newRoute
                         break
                 else:
@@ -209,3 +212,6 @@ class Map:
             self.__GetShortestPathsToMultipleTiles(visitedPathsTemp, destinationTiles, results)
 
         return results
+
+    def GetManhattanDistance(self, pos1, pos2):
+        return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])

@@ -60,9 +60,12 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Six - Part One: {0}".format(largestArea))
         self.assertEqual(largestArea, 4290)
 
-        # lenAfterImprovement = GetShortestPolymerAfterImprovement("{:s}".format(d5Input))
-        # print("Day Six - Part Two: {0}".format(lenAfterImprovement))
-        # self.assertEqual(lenAfterImprovement, 6694)
+        largestArea = GetLargestAreaWithManhattanDistance(d6Test1.copy(), 32)
+        self.assertEqual(largestArea, 16)
+
+        largestArea = GetLargestAreaWithManhattanDistance(d6Input.copy(), 10000)
+        print("Day Six - Part Two: {0}".format(largestArea))
+        self.assertEqual(largestArea, 37318)
 
     def testDaySeven(self):
         stepDict = GenerateStepDict(d7Input.copy())
@@ -107,6 +110,7 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         battleOutcome = BattleTillElfsWin(d15Input.copy(), log=False)
         print("Day Fifteen - Part Two: {0}".format(battleOutcome))
         self.assertEqual(battleOutcome, 33621)
+
 
 if __name__ == '__main__':
     unittest.main()

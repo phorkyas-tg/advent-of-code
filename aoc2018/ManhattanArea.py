@@ -55,6 +55,7 @@ class InterferanceMapObjectBuilder(MapObjectBuilder):
 
 class InterferanceMap(Map):
     def __init__(self, coordinates):
+        self.coordinats = coordinates
         mapInput = self.GetMapInputFromCoordinates(coordinates)
         super(InterferanceMap, self).__init__(mapInput,
                                               mapObjectBuilderClass=InterferanceMapObjectBuilder)
@@ -131,8 +132,26 @@ class InterferanceMap(Map):
 
         return max(result.values())
 
+    def GetManhattanDistanceToCoordinates(self, pos):
+        dist = 0
+        for objectPos in self.coordinats:
+            dist += self.GetManhattanDistance(pos, objectPos)
+        return dist
+
+    def GetLargestAreaWithManhattanDistance(self, distance):
+        area = 0
+        for pos in self.mapDict.keys():
+            if self.GetManhattanDistanceToCoordinates(pos) < distance:
+                area += 1
+        return area
+
 
 def GetLargestFiniteArea(coordinates):
     iMap = InterferanceMap(coordinates)
     return iMap.RunSteps()
+
+
+def GetLargestAreaWithManhattanDistance(coordinates, distance):
+    iMap = InterferanceMap(coordinates)
+    return iMap.GetLargestAreaWithManhattanDistance(distance)
 
