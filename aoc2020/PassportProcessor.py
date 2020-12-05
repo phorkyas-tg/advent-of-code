@@ -8,7 +8,7 @@ def ParsePassport(passportInput):
     for entry in entries:
         key, value = entry.split(":")
         passport[key] = value
-    return  passport
+    return passport
 
 
 def CountValidPassports(passportInputs):
@@ -58,12 +58,11 @@ def CountValidPassportsAdvanced(passportInputs):
             #     If in, the number must be at least 59 and at most 76
             key = "hgt"
             unit = passport[key][-2:]
+            number = int(passport[key][:-2])
             if unit == "cm":
-                number = int(passport[key][:3])
                 if not 150 <= number <= 193:
                     continue
             elif unit == "in":
-                number = int(passport[key][:2])
                 if not 59 <= number <= 76:
                     continue
             else:
@@ -71,7 +70,7 @@ def CountValidPassportsAdvanced(passportInputs):
 
             # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f
             key = "hcl"
-            pattern = re.compile("#[a-f|0-9]{6}")
+            pattern = re.compile("#[a-f0-9]{6}")
             if pattern.fullmatch(passport[key]) is None:
                 continue
 
@@ -89,6 +88,6 @@ def CountValidPassportsAdvanced(passportInputs):
             count += 1
 
         except (KeyError, ValueError):
-            continue
+            pass
 
     return count

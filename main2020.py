@@ -54,6 +54,20 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Four - Part Two: {0}".format(validPasscodes))
         self.assertEqual(validPasscodes, 140)
 
+    def testDayFive(self):
+        self.assertEqual((44, 5, 357), GetRowColumnIdFromInputStr("FBFBBFFRLR"))
+        self.assertEqual((70, 7, 567), GetRowColumnIdFromInputStr("BFFFBBFRRR"))
+        self.assertEqual((14, 7, 119), GetRowColumnIdFromInputStr("FFFBBBFRRR"))
+        self.assertEqual((102, 4, 820), GetRowColumnIdFromInputStr("BBFFBBFRLL"))
+
+        seatId = GetHigherstSeatID(d5Input.copy())
+        print("Day Five - Part One: {0}".format(seatId))
+        self.assertEqual(seatId, 842)
+
+        seatId = GetMySeatID(d5Input.copy())
+        print("Day Five - Part Two: {0}".format(seatId))
+        self.assertEqual(seatId, 617)
+
 
 if __name__ == '__main__':
     unittest.main()
