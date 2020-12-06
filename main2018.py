@@ -77,6 +77,61 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Seven - Part Two: {0}".format(seconds))
         self.assertEqual(seconds, 1031)
 
+    def testDayEight(self):
+        sumOfMetaData = GetSumOfMetaData(d8Test1.copy())
+        self.assertEqual(sumOfMetaData, 138)
+
+        sumOfMetaData = GetSumOfMetaData(d8Input.copy())
+        print("Day Eight - Part One: {0}".format(sumOfMetaData))
+        self.assertEqual(sumOfMetaData, 38722)
+
+        sumOfMetaData = GetSumOfMetaDataAdvanced(d8Test1.copy())
+        self.assertEqual(sumOfMetaData, 66)
+
+        sumOfMetaData = GetSumOfMetaDataAdvanced(d8Input.copy())
+        print("Day Eight - Part Two: {0}".format(sumOfMetaData))
+        self.assertEqual(sumOfMetaData, 13935)
+
+    def testDayNine(self):
+        from aocLib.Array import JumpIndexRollingBuffer
+        self.assertEqual(JumpIndexRollingBuffer(1, 2, 6), 3)
+        self.assertEqual(JumpIndexRollingBuffer(1, 3, 6), 4)
+        self.assertEqual(JumpIndexRollingBuffer(1, 4, 6), 5)
+        self.assertEqual(JumpIndexRollingBuffer(5, 2, 6), 1)
+        self.assertEqual(JumpIndexRollingBuffer(5, 3, 6), 2)
+        self.assertEqual(JumpIndexRollingBuffer(5, 4, 6), 3)
+
+        self.assertEqual(JumpIndexRollingBuffer(1, -2, 6), 5)
+        self.assertEqual(JumpIndexRollingBuffer(1, -3, 6), 4)
+        self.assertEqual(JumpIndexRollingBuffer(1, -4, 6), 3)
+        self.assertEqual(JumpIndexRollingBuffer(5, -2, 6), 3)
+        self.assertEqual(JumpIndexRollingBuffer(5, -3, 6), 2)
+        self.assertEqual(JumpIndexRollingBuffer(5, -4, 6), 1)
+
+        self.assertEqual(GetBestScore([9, 25]), 32)
+        self.assertEqual(GetBestScore([10, 1618]), 8317)
+        self.assertEqual(GetBestScore([13, 7999]), 146373)
+        self.assertEqual(GetBestScore([17, 1104]), 2764)
+        self.assertEqual(GetBestScore([21, 6111]), 54718)
+        self.assertEqual(GetBestScore([30, 5807]), 37305)
+
+        bestScore = GetBestScoreFast(d9Input.copy())
+        print("Day Eight - Part One: {0}".format(bestScore))
+        self.assertEqual(bestScore, 375465)
+
+        self.assertEqual(GetBestScoreFast([9, 25]), 32)
+        self.assertEqual(GetBestScoreFast([10, 1618]), 8317)
+        self.assertEqual(GetBestScoreFast([13, 7999]), 146373)
+        self.assertEqual(GetBestScoreFast([17, 1104]), 2764)
+        self.assertEqual(GetBestScoreFast([21, 6111]), 54718)
+        self.assertEqual(GetBestScoreFast([30, 5807]), 37305)
+
+        times100 = d9Input.copy()
+        times100[1] = times100[1] * 100
+        bestScore = GetBestScoreFast(times100)
+        print("Day Eight - Part Two: {0}".format(bestScore))
+        self.assertEqual(bestScore, 3037741441)
+
     def testDayFifteen(self):
         battleOutcome = CalculateBattleOutcome(d15test1.copy(), log=False)
         self.assertEqual(battleOutcome, 27730)
