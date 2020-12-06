@@ -22,7 +22,7 @@ def GetBSPDict(listOfInput):
     return bspDict
 
 
-def GetHigherstSeatID(listOfInput):
+def GetHighestSeatId(listOfInput):
     bspDict = GetBSPDict(listOfInput)
     highestId = 0
     for sid in bspDict.values():
@@ -31,7 +31,7 @@ def GetHigherstSeatID(listOfInput):
     return highestId
 
 
-def GetMySeatID(listOfInput):
+def GetMySeatId(listOfInput):
     bspDict = GetBSPDict(listOfInput)
     sortedIds = []
     for seatId in bspDict.values():

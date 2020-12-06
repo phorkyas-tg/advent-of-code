@@ -60,13 +60,28 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         self.assertEqual((14, 7, 119), GetRowColumnIdFromInputStr("FFFBBBFRRR"))
         self.assertEqual((102, 4, 820), GetRowColumnIdFromInputStr("BBFFBBFRLL"))
 
-        seatId = GetHigherstSeatID(d5Input.copy())
+        seatId = GetHighestSeatId(d5Input.copy())
         print("Day Five - Part One: {0}".format(seatId))
         self.assertEqual(seatId, 842)
 
-        seatId = GetMySeatID(d5Input.copy())
+        seatId = GetMySeatId(d5Input.copy())
         print("Day Five - Part Two: {0}".format(seatId))
         self.assertEqual(seatId, 617)
+
+    def testDaySix(self):
+        count = SumOfDeclarationCounts(d6Test1.copy())
+        self.assertEqual(count, 11)
+
+        count = SumOfDeclarationCounts(d6Input.copy())
+        print("Day Six - Part One: {0}".format(count))
+        self.assertEqual(count, 6416)
+
+        count = SumOfDeclarationCountsAdvanced(d6Test1.copy())
+        self.assertEqual(count, 6)
+
+        count = SumOfDeclarationCountsAdvanced(d6Input.copy())
+        print("Day Six - Part Two: {0}".format(count))
+        self.assertEqual(count, 3050)
 
 
 if __name__ == '__main__':

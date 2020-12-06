@@ -3,4 +3,5 @@ from .SumOfEntries import MultiplyTwoEntriesWithSum, MultiplyThreeEntriesWithSum
 from .CheckPassword import CheckValidPasswords, CheckValidPasswordsAdvanced
 from .Trajectory import CountTreesWhileTraversing, CountMultipleSlopes
 from .PassportProcessor import CountValidPassports, CountValidPassportsAdvanced
-from .BinarySpacePartitioning import GetHigherstSeatID, GetMySeatID, GetRowColumnIdFromInputStr
+from .BinarySpacePartitioning import GetHighestSeatId, GetMySeatId, GetRowColumnIdFromInputStr
+from .CustomsDeclaration import SumOfDeclarationCounts, SumOfDeclarationCountsAdvanced
