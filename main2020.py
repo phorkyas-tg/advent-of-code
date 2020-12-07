@@ -83,6 +83,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Six - Part Two: {0}".format(count))
         self.assertEqual(count, 3050)
 
+    def testDaySeven(self):
+        countBag = CountPossibleBags(d7Test1.copy())
+        self.assertEqual(countBag, 4)
+
+        countBag = CountPossibleBags(d7Input.copy())
+        print("Day Seven - Part One: {0}".format(countBag))
+        self.assertEqual(countBag, 265)
+
+        countBag = CountChildrenBags(d7Test1.copy())
+        self.assertEqual(countBag, 32)
+
+        countBag = CountChildrenBags(d7Input.copy())
+        print("Day Seven - Part Two: {0}".format(countBag))
+        self.assertEqual(countBag, 14177)
+
 
 if __name__ == '__main__':
     unittest.main()
