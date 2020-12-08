@@ -9,7 +9,7 @@ A collection of AoC solutions.
 
 A list of interesting solutions for further puzzles.
 
-* main2018.reatDayEight and main2020.reatDaySeven
+* main2018.testDayEight and main2020.testDaySeven
   * recursion
 * main2018.testDayNine 
   * ring buffer
