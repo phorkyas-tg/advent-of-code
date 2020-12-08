@@ -116,7 +116,7 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         self.assertEqual(GetBestScore([30, 5807]), 37305)
 
         bestScore = GetBestScoreFast(d9Input.copy())
-        print("Day Eight - Part One: {0}".format(bestScore))
+        print("Day Nine - Part One: {0}".format(bestScore))
         self.assertEqual(bestScore, 375465)
 
         self.assertEqual(GetBestScoreFast([9, 25]), 32)
@@ -129,7 +129,7 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         times100 = d9Input.copy()
         times100[1] = times100[1] * 100
         bestScore = GetBestScoreFast(times100)
-        print("Day Eight - Part Two: {0}".format(bestScore))
+        print("Day Nine - Part Two: {0}".format(bestScore))
         self.assertEqual(bestScore, 3037741441)
 
     def testDayFifteen(self):
