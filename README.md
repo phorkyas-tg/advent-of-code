@@ -1,2 +1,23 @@
-# advent-of-code
-https://adventofcode.com
+# Advent of Code
+
+![Python Version][python-image]
+[![AOC Version][aoc-image]][aoc-url]
+
+A collection of AoC solutions.
+
+## Knowledge base
+
+A list of interesting solutions for further puzzles.
+
+* main2018.reatDayEight and main2020.reatDaySeven
+  * recursion
+* main2018.testDayNine 
+  * ring buffer
+  * fast array handling (insert, pop)
+* main2018.testDayFifteen
+  * maps
+  * find short path
+
+[python-image]: https://badgen.net/badge/python/3.7/blue
+[aoc-image]: https://badgen.net/badge/aoc/2018-2020/green
+[aoc-url]: https://adventofcode.com
