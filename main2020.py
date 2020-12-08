@@ -98,6 +98,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Seven - Part Two: {0}".format(countBag))
         self.assertEqual(countBag, 14177)
 
+    def testDayEight(self):
+        acc = GetLastAcc(d8Test1.copy())
+        self.assertEqual(acc, 5)
+
+        acc = GetLastAcc(d8Input.copy())
+        print("Day Eight - Part One: {0}".format(acc))
+        self.assertEqual(acc, 1744)
+
+        acc = GetLastAccAfterTermination(d8Test1.copy())
+        self.assertEqual(acc, 8)
+
+        acc = GetLastAccAfterTermination(d8Input.copy())
+        print("Day Eight - Part Two: {0}".format(acc))
+        self.assertEqual(acc, 1174)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -35,7 +35,10 @@ def GetBagsFromInput(puzzleInput):
     return result
 
 
-def CountBags(bagDict, currentBag, possibleNames=[]):
+def CountBags(bagDict, currentBag, possibleNames=None):
+    if possibleNames is None:
+        possibleNames = []
+
     for parent in bagDict[currentBag].parents:
         if parent not in possibleNames:
             possibleNames.append(parent)
@@ -43,8 +46,8 @@ def CountBags(bagDict, currentBag, possibleNames=[]):
     return possibleNames
 
 
-def CountChildBags(bagDict, currentBag, count=1):
-    tempCount = count
+def CountChildBags(bagDict, currentBag, count=0):
+    tempCount = 1 if count == 0 else count
     for child, cnt in bagDict[currentBag].children.items():
         count += tempCount * CountChildBags(bagDict, child, cnt)
     return count
@@ -52,15 +55,13 @@ def CountChildBags(bagDict, currentBag, count=1):
 
 def CountPossibleBags(puzzleInput):
     result = GetBagsFromInput(puzzleInput)
-    possibleNames = []
-    possibleNames = CountBags(result, "shiny gold", possibleNames=possibleNames)
+    possibleNames = CountBags(result, "shiny gold")
     return len(possibleNames)
 
 
 def CountChildrenBags(puzzleInput):
     result = GetBagsFromInput(puzzleInput)
-    count = 1
-    count = CountChildBags(result, "shiny gold", count=count)
-    return count-1
+    count = CountChildBags(result, "shiny gold")
+    return count
 
 

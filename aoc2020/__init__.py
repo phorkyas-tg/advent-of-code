@@ -6,3 +6,4 @@ from .PassportProcessor import CountValidPassports, CountValidPassportsAdvanced
 from .BinarySpacePartitioning import GetHighestSeatId, GetMySeatId, GetRowColumnIdFromInputStr
 from .CustomsDeclaration import SumOfDeclarationCounts, SumOfDeclarationCountsAdvanced
 from .Bags import CountPossibleBags, CountChildrenBags
+from .GameConsole import GetLastAcc, GetLastAccAfterTermination
