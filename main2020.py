@@ -113,6 +113,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Eight - Part Two: {0}".format(acc))
         self.assertEqual(acc, 1174)
 
+    def testDayNine(self):
+        wn = GetFirstWrongNumber(d9Test1.copy(), 5)
+        self.assertEqual(wn, 127)
+
+        wn = GetFirstWrongNumber(d9Input.copy(), 25)
+        print("Day Nine - Part One: {0}".format(wn))
+        self.assertEqual(wn, 57195069)
+
+        cn = GetContiguousNumber(d9Test1.copy(), 127)
+        self.assertEqual(cn, 62)
+
+        cn = GetContiguousNumber(d9Input.copy(), 57195069)
+        print("Day Nine - Part Two: {0}".format(cn))
+        self.assertEqual(cn, 7409241)
+
 
 if __name__ == '__main__':
     unittest.main()

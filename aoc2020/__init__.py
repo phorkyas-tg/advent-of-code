@@ -7,3 +7,4 @@ from .BinarySpacePartitioning import GetHighestSeatId, GetMySeatId, GetRowColumn
 from .CustomsDeclaration import SumOfDeclarationCounts, SumOfDeclarationCountsAdvanced
 from .Bags import CountPossibleBags, CountChildrenBags
 from .GameConsole import GetLastAcc, GetLastAccAfterTermination
+from .XMAS import GetFirstWrongNumber, GetContiguousNumber
