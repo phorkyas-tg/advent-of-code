@@ -128,6 +128,32 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Nine - Part Two: {0}".format(cn))
         self.assertEqual(cn, 7409241)
 
+    def testDayTen(self):
+        result = CountJolts(d10Test1.copy())
+        self.assertEqual(result, 35)
+        result = CountJolts(d10Test2.copy())
+        self.assertEqual(result, 220)
+
+        result = CountJolts(d10Input.copy())
+        print("Day Ten - Part One: {0}".format(result))
+        self.assertEqual(result, 2080)
+
+        self.assertEqual(len(GetCombinations([1, 2, 3, 4])), 4)
+        self.assertEqual(len(GetCombinations([1, 2, 3, 4, 5])), 7)
+        self.assertEqual(len(GetCombinations([1, 2, 3, 4, 5, 6])), 13)
+        self.assertEqual(len(GetCombinations([1, 2, 3, 4, 5, 6, 7])), 24)
+        self.assertEqual(len(GetCombinations([1, 3, 5])), 1)
+        self.assertEqual(len(GetCombinations([1, 2, 4, 5])), 3)
+
+        result = CountPossibleArrangements(d10Test1.copy())
+        self.assertEqual(result, 8)
+        result = CountPossibleArrangements(d10Test2.copy())
+        self.assertEqual(result, 19208)
+
+        result = CountPossibleArrangements(d10Input.copy())
+        print("Day Ten - Part Two: {0}".format(result))
+        self.assertEqual(result, 6908379398144)
+
 
 if __name__ == '__main__':
     unittest.main()

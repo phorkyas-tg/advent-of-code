@@ -16,7 +16,9 @@ A list of interesting solutions for further puzzles.
   * fast array handling (insert, pop)
 * main2018.testDayFifteen
   * maps
-  * find short path
+  * the shortest path
+* main2020.testDayTen
+  * combination
 
 [python-image]: https://badgen.net/badge/python/3.7/blue
 [aoc-image]: https://badgen.net/badge/aoc/2018-2020/green
