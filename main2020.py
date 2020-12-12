@@ -169,6 +169,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Eleven - Part Two: {0}".format(result))
         self.assertEqual(result, 2138)
 
+    def testDayTvelve(self):
+        result = GetShipManhattanDistance(d12Test1.copy())
+        self.assertEqual(result, 25)
+
+        result = GetShipManhattanDistance(d12Input.copy())
+        print("Day Tvelve - Part One: {0}".format(result))
+        self.assertEqual(result, 1010)
+
+        result = GetShipWithWaypointManhattanDistance(d12Test1.copy())
+        self.assertEqual(result, 286)
+
+        result = GetShipWithWaypointManhattanDistance(d12Input.copy())
+        print("Day Tvelve - Part Two: {0}".format(result))
+        self.assertEqual(result, 52742)
+
 
 if __name__ == '__main__':
     unittest.main()
