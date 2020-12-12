@@ -9,3 +9,5 @@ from .Bags import CountPossibleBags, CountChildrenBags
 from .GameConsole import GetLastAcc, GetLastAccAfterTermination
 from .XMAS import GetFirstWrongNumber, GetContiguousNumber
 from .AdapterArray import CountJolts, CountPossibleArrangements, GetCombinations
+from .SeatingSystem import GetOccupiedSeats, GetOccupiedSeatsBySide
+from .RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDistance

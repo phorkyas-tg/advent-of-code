@@ -154,6 +154,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Ten - Part Two: {0}".format(result))
         self.assertEqual(result, 6908379398144)
 
+    def testDayEleven(self):
+        result = GetOccupiedSeats(d11Test1.copy())
+        self.assertEqual(result, 37)
+
+        result = GetOccupiedSeats(d11Input.copy())
+        print("Day Eleven - Part One: {0}".format(result))
+        self.assertEqual(result, 2329)
+
+        result = GetOccupiedSeatsBySide(d11Test1.copy())
+        self.assertEqual(result, 26)
+
+        result = GetOccupiedSeatsBySide(d11Input.copy())
+        print("Day Eleven - Part Two: {0}".format(result))
+        self.assertEqual(result, 2138)
+
 
 if __name__ == '__main__':
     unittest.main()

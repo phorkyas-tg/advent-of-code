@@ -124,6 +124,47 @@ class Map:
                     tiles.append(pos)
         return tiles
 
+    def CountSurroundingTiles(self, x, y, objectNames=[], termination=None):
+        """
+        count surrounding tiles - if count >= termination return elif termination = None count all
+        """
+        count = 0
+        for pos in [(x-1, y-1), (x, y-1), (x+1, y-1),
+                    (x-1, y), (x+1, y),
+                    (x-1, y+1), (x, y+1), (x+1, y+1)]:
+            tileId = self.mapDict.get(pos, None)
+            if (tileId is not None) and \
+                    (len(objectNames) == 0 or
+                     self.mapObjects[tileId].GetObjectName() in objectNames):
+                count += 1
+                if termination is not None and count >= termination:
+                    return count
+        return count
+
+    def GetTilesInSight(self, x, y, objectNames=[]):
+        """
+        look in every direction till you find one of the tiles in objectNames
+        """
+        tiles = []
+
+        for xDir, yDir in [(0, -1), (0, 1), (-1, 0), (1, 0),
+                           (-1, -1), (-1, 1), (1, 1), (1, -1)]:
+            yDelta = yDir
+            xDelta = xDir
+            while True:
+                pos = (x+xDelta, y+yDelta)
+                if pos not in self.mapDict:
+                    break
+
+                objId = self.mapDict[pos]
+                if self.mapObjects[objId].GetObjectName() in objectNames:
+                    tiles.append((pos, objId))
+                    break
+                yDelta += yDir
+                xDelta += xDir
+
+        return tiles
+
     def GetElementPosition(self, elemntId):
         for pos, element in self.mapDict.items():
             if element == elemntId:
