@@ -169,20 +169,35 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Eleven - Part Two: {0}".format(result))
         self.assertEqual(result, 2138)
 
-    def testDayTvelve(self):
+    def testDayTwelve(self):
         result = GetShipManhattanDistance(d12Test1.copy())
         self.assertEqual(result, 25)
 
         result = GetShipManhattanDistance(d12Input.copy())
-        print("Day Tvelve - Part One: {0}".format(result))
+        print("Day Twelve - Part One: {0}".format(result))
         self.assertEqual(result, 1010)
 
         result = GetShipWithWaypointManhattanDistance(d12Test1.copy())
         self.assertEqual(result, 286)
 
         result = GetShipWithWaypointManhattanDistance(d12Input.copy())
-        print("Day Tvelve - Part Two: {0}".format(result))
+        print("Day Twelve - Part Two: {0}".format(result))
         self.assertEqual(result, 52742)
+
+    def testDayThirteen(self):
+        result = GetNextBus(d13Test1.copy())
+        self.assertEqual(result, 295)
+
+        result = GetNextBus(d13Input.copy())
+        print("Day Thirteen - Part One: {0}".format(result))
+        self.assertEqual(result, 2095)
+
+        result = GetSpecialScheduleTime(d13Test1.copy())
+        self.assertEqual(result, 1068781)
+
+        result = GetSpecialScheduleTime(d13Input.copy())
+        print("Day Thirteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 598411311431841)
 
 
 if __name__ == '__main__':

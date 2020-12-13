@@ -11,3 +11,4 @@ from .XMAS import GetFirstWrongNumber, GetContiguousNumber
 from .AdapterArray import CountJolts, CountPossibleArrangements, GetCombinations
 from .SeatingSystem import GetOccupiedSeats, GetOccupiedSeatsBySide
 from .RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDistance
+from .ShuttleSearch import GetNextBus, GetSpecialScheduleTime
