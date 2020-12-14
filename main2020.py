@@ -199,6 +199,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Thirteen - Part Two: {0}".format(result))
         self.assertEqual(result, 598411311431841)
 
+    def testDayFourteen(self):
+        result = GetSumOfRegisters(d14Test1.copy())
+        self.assertEqual(result, 165)
+
+        result = GetSumOfRegisters(d14Input.copy())
+        print("Day Fourteen - Part One: {0}".format(result))
+        self.assertEqual(result, 5902420735773)
+
+        result = GetSumOfFloatingRegisters(d14Test2.copy())
+        self.assertEqual(result, 208)
+
+        result = GetSumOfFloatingRegisters(d14Input.copy())
+        print("Day Fourteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 3801988250775)
+
 
 if __name__ == '__main__':
     unittest.main()
