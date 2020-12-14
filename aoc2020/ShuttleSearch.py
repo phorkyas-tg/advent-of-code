@@ -35,13 +35,13 @@ def GetSpecialScheduleTime(puzzleInput):
                 pairs.append([busId1[0], busId2[0], (busId2[1] - busId1[1])])
 
     # the start pair is the first pair that was found
-    pair = [0, 0] if len(pairs) == 0 else pairs[0]
+    pair = [0, 0, 0] if len(pairs) == 0 else pairs[0]
     # jump at least the distance of the product of the start pair. if there are other pairs which
     # share the same partner as the start pair multiply this number as well
     # Example:
     # pairs = [7, 100], [19, 100], [23, 140], [50, 100]
     # jump = start pair product * partner pairs = (7 * 100) * 19 * 50
-    jump = 1 if pair == [0, 0] else (pair[0] * pair[1])
+    jump = 1 if pair == [0, 0, 0] else (pair[0] * pair[1])
     for i in range(1, len(pairs)):
         if pairs[i][1] == pairs[0][1]:
             jump *= pairs[i][0]
