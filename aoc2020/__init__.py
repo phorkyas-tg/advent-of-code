@@ -13,3 +13,4 @@ from .SeatingSystem import GetOccupiedSeats, GetOccupiedSeatsBySide
 from .RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDistance
 from .ShuttleSearch import GetNextBus, GetSpecialScheduleTime
 from .DockingData import GetSumOfRegisters, GetSumOfFloatingRegisters
+from .RambunctiousRecitation import GetSpokenNumber

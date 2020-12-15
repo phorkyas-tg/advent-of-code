@@ -214,6 +214,18 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Fourteen - Part Two: {0}".format(result))
         self.assertEqual(result, 3801988250775)
 
+    def testDayFifteen(self):
+        result = GetSpokenNumber(d15Test1.copy(), 2020)
+        self.assertEqual(result, 436)
+
+        result = GetSpokenNumber(d15Input.copy(), 2020)
+        print("Day Fifteen - Part One: {0}".format(result))
+        self.assertEqual(result, 447)
+
+        result = GetSpokenNumber(d15Input.copy(), 30000000)
+        print("Day Fifteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 11721679)
+
 
 if __name__ == '__main__':
     unittest.main()
