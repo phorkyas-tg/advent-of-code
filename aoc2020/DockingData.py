@@ -20,16 +20,11 @@ def GetMaskCombinations(bitMask):
     # replace all 1s with 0s for the or operation later
     bitMasks = [bitMask.replace("1", "0")]
 
-    while True:
-        replaced = False
+    while "X" in bitMasks[0]:
         bmTemp = []
         for bm in bitMasks:
-            if "X" in bm:
-                bmTemp.append(bm.replace("X", "1", 1))
-                bmTemp.append(bm.replace("X", "0", 1))
-                replaced = True
-        if replaced is False:
-            break
+            bmTemp.append(bm.replace("X", "1", 1))
+            bmTemp.append(bm.replace("X", "0", 1))
         bitMasks = bmTemp.copy()
 
     return [int(value, 2) for value in bitMasks]
@@ -51,8 +46,8 @@ def GetSumOfFloatingRegisters(puzzleInput):
             mem = c.split("[")
             regNumber = int(mem[1][:-1])
             # orMask: first mask the signal 0 -> no change, 1 -> overwrite with 1
-            # subMask: replace all X pos with 0, the rest must not change
-            # mask: put on the mask where the X pos float and the rest is the same
+            # subMask: replace all X with 0, the rest must not change
+            # mask: put on the mask where the X float and the rest is the same
             for r in [((regNumber | orMask) & subMask) | mask for mask in masks]:
                 register[r] = int(value)
 
