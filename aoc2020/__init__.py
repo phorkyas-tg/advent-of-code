@@ -14,3 +14,4 @@ from .RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDist
 from .ShuttleSearch import GetNextBus, GetSpecialScheduleTime
 from .DockingData import GetSumOfRegisters, GetSumOfFloatingRegisters
 from .RambunctiousRecitation import GetSpokenNumber
+from .TicketTranslation import GetInvalidTickets, GetValidTickets

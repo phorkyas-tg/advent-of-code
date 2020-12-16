@@ -226,6 +226,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Fifteen - Part Two: {0}".format(result))
         self.assertEqual(result, 11721679)
 
+    def testDaySixteen(self):
+        result = GetInvalidTickets(d16Test1)
+        self.assertEqual(result, 71)
+
+        result = GetInvalidTickets(d16Input)
+        print("Day Sixteen - Part One: {0}".format(result))
+        self.assertEqual(result, 26980)
+
+        result = GetValidTickets(d16Test2, keyWord="class")
+        self.assertEqual(result, 12)
+
+        result = GetValidTickets(d16Input)
+        print("Day Sixteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 3021381607403)
+
 
 if __name__ == '__main__':
     unittest.main()
