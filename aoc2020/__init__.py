@@ -1,17 +1,17 @@
 from .AocInput import *
-from .SumOfEntries import MultiplyTwoEntriesWithSum, MultiplyThreeEntriesWithSum
-from .CheckPassword import CheckValidPasswords, CheckValidPasswordsAdvanced
-from .Trajectory import CountTreesWhileTraversing, CountMultipleSlopes
-from .PassportProcessor import CountValidPassports, CountValidPassportsAdvanced
-from .BinarySpacePartitioning import GetHighestSeatId, GetMySeatId, GetRowColumnIdFromInputStr
-from .CustomsDeclaration import SumOfDeclarationCounts, SumOfDeclarationCountsAdvanced
-from .Bags import CountPossibleBags, CountChildrenBags
-from .GameConsole import GetLastAcc, GetLastAccAfterTermination
-from .XMAS import GetFirstWrongNumber, GetContiguousNumber
-from .AdapterArray import CountJolts, CountPossibleArrangements, GetCombinations
-from .SeatingSystem import GetOccupiedSeats, GetOccupiedSeatsBySide
-from .RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDistance
-from .ShuttleSearch import GetNextBus, GetSpecialScheduleTime
-from .DockingData import GetSumOfRegisters, GetSumOfFloatingRegisters
-from .RambunctiousRecitation import GetSpokenNumber
-from .TicketTranslation import GetInvalidTickets, GetValidTickets
+from ._01_ReportRepair import MultiplyTwoEntriesWithSum, MultiplyThreeEntriesWithSum
+from ._02_PasswordPhilosophy import CheckValidPasswords, CheckValidPasswordsAdvanced
+from ._03_TobogganTrajectory import CountTreesWhileTraversing, CountMultipleSlopes
+from ._04_PassportProcessing import CountValidPassports, CountValidPassportsAdvanced
+from ._05_BinaryBoarding import GetHighestSeatId, GetMySeatId, GetRowColumnIdFromInputStr
+from ._06_CustomCustoms import SumOfDeclarationCounts, SumOfDeclarationCountsAdvanced
+from ._07_HandyHaversacks import CountPossibleBags, CountChildrenBags
+from ._08_HandheldHalting import GetLastAcc, GetLastAccAfterTermination
+from ._09_EncodingError import GetFirstWrongNumber, GetContiguousNumber
+from ._10_AdapterArray import CountJolts, CountPossibleArrangements, GetCombinations
+from ._11_SeatingSystem import GetOccupiedSeats, GetOccupiedSeatsBySide
+from ._12_RainRisk import GetShipManhattanDistance, GetShipWithWaypointManhattanDistance
+from ._13_ShuttleSearch import GetNextBus, GetSpecialScheduleTime
+from ._14_DockingData import GetSumOfRegisters, GetSumOfFloatingRegisters
+from ._15_RambunctiousRecitation import GetSpokenNumber
+from ._16_TicketTranslation import GetInvalidTickets, GetValidTickets

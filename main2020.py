@@ -1,5 +1,3 @@
-import unittest
-
 from AOCBase import AOCTestCases
 from aoc2020 import *
 
