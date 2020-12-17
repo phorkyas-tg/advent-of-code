@@ -241,6 +241,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Sixteen - Part Two: {0}".format(result))
         self.assertEqual(result, 3021381607403)
 
+    def testDaySeventeen(self):
+        result = GetActiveCubes3D(d17Test1)
+        self.assertEqual(result, 112)
+
+        result = GetActiveCubes3D(d17Input)
+        print("Day Seventeen - Part One: {0}".format(result))
+        self.assertEqual(result, 386)
+
+        result = GetActiveCubes4D(d17Test1)
+        self.assertEqual(result, 848)
+
+        result = GetActiveCubes4D(d17Input)
+        print("Day Seventeen - Part Two: {0}".format(result))
+        self.assertEqual(result, 2276)
+
 
 if __name__ == '__main__':
     unittest.main()
