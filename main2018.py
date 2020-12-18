@@ -132,6 +132,36 @@ class TestAdventOfCode2018(AOCTestCases.TestAdventOfCode):
         print("Day Nine - Part Two: {0}".format(bestScore))
         self.assertEqual(bestScore, 3037741441)
 
+    def testDayTen(self):
+        result, time = GetStarMessage(d10Test1)
+        self.assertEqual(result,
+                         ['#...#..###',
+                          '#...#...#.',
+                          '#...#...#.',
+                          '#####...#.',
+                          '#...#...#.',
+                          '#...#...#.',
+                          '#...#...#.',
+                          '#...#..###'])
+        self.assertEqual(time, 3)
+
+        result, time = GetStarMessage(d10Input)
+        print("Day Ten - Part One: {0}".format("GPEPPPEJ"))
+        self.assertEqual(result,
+                         ['.####...#####...######..#####...#####...#####...######.....###',
+                          '#....#..#....#..#.......#....#..#....#..#....#..#...........#.',
+                          '#.......#....#..#.......#....#..#....#..#....#..#...........#.',
+                          '#.......#....#..#.......#....#..#....#..#....#..#...........#.',
+                          '#.......#####...#####...#####...#####...#####...#####.......#.',
+                          '#..###..#.......#.......#.......#.......#.......#...........#.',
+                          '#....#..#.......#.......#.......#.......#.......#...........#.',
+                          '#....#..#.......#.......#.......#.......#.......#.......#...#.',
+                          '#...##..#.......#.......#.......#.......#.......#.......#...#.',
+                          '.###.#..#.......######..#.......#.......#.......######...###..'])
+
+        print("Day Ten - Part Two: {0}".format(time))
+        self.assertEqual(time, 10101)
+
     def testDayFifteen(self):
         battleOutcome = CalculateBattleOutcome(d15test1.copy(), log=False)
         self.assertEqual(battleOutcome, 27730)

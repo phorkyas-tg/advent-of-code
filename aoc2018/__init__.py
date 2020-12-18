@@ -10,4 +10,5 @@ from .BattleMapSolver import CalculateBattleOutcome, BattleTillElfsWin
 from .ManhattanArea import GetLargestFiniteArea, GetLargestAreaWithManhattanDistance
 from .LicenseFileParser import GetSumOfMetaData, GetSumOfMetaDataAdvanced
 from .MarbleGame import GetBestScore, GetBestScoreFast
+from ._10_TheStarsAlign import GetStarMessage
 
