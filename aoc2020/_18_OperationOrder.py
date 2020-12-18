@@ -41,9 +41,6 @@ def Evaluate(expression, func=CalculateSubExpression):
             left = subExpression.rfind("(")
             if left >= 0:
                 subExpression = subExpression[left + 1:]
-            right = subExpression.find(")")
-            if right >= 0:
-                subExpression = subExpression[:right]
             result = func(subExpression.split(" "))
             expression = expression.replace("({0})".format(subExpression), "{0}".format(result))
     return func(expression.split(" "))
