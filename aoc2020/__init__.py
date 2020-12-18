@@ -16,3 +16,4 @@ from ._14_DockingData import GetSumOfRegisters, GetSumOfFloatingRegisters
 from ._15_RambunctiousRecitation import GetSpokenNumber
 from ._16_TicketTranslation import GetInvalidTickets, GetValidTickets
 from ._17_ConwayCubes import GetActiveCubes3D, GetActiveCubes4D
+from ._18_OperationOrder import GetSumOfCalculations, GetSumOfCalculationsAdvanced

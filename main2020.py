@@ -256,6 +256,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Seventeen - Part Two: {0}".format(result))
         self.assertEqual(result, 2276)
 
+    def testDayEighteen(self):
+        result = GetSumOfCalculations(d18Test1.copy())
+        self.assertEqual(result, 13632)
+
+        result = GetSumOfCalculations(d18Input.copy())
+        print("Day Eighteen - Part One: {0}".format(result))
+        self.assertEqual(result, 31142189909908)
+
+        result = GetSumOfCalculationsAdvanced(d18Test1.copy())
+        self.assertEqual(result, 23340)
+
+        result = GetSumOfCalculationsAdvanced(d18Input.copy())
+        print("Day Eighteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 323912478287549)
+
 
 if __name__ == '__main__':
     unittest.main()
