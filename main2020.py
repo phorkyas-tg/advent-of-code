@@ -271,6 +271,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Eighteen - Part Two: {0}".format(result))
         self.assertEqual(result, 323912478287549)
 
+    def testDayNineteen(self):
+        result = CountValidMonsterMessages(d19Test1)
+        self.assertEqual(result, 2)
+
+        result = CountValidMonsterMessages(d19Input)
+        print("Day Nineteen - Part One: {0}".format(result))
+        self.assertEqual(result, 160)
+
+        result = CountValidMonsterMessagesLoop(d19Test2, depth=4)
+        self.assertEqual(result, 12)
+
+        result = CountValidMonsterMessagesLoop(d19Input)
+        print("Day Nineteen - Part Two: {0}".format(result))
+        self.assertEqual(result, 357)
+
 
 if __name__ == '__main__':
     unittest.main()
