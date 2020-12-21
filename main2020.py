@@ -301,6 +301,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Twenty - Part Two: {0}".format(result))
         self.assertEqual(result, 1885)
 
+    def testDayTwentyone(self):
+        result = CountIngredientsWithoutAllergens(d21Test1)
+        self.assertEqual(result, 5)
+
+        result = CountIngredientsWithoutAllergens(d21Input)
+        print("Day Twentyone - Part One: {0}".format(result))
+        self.assertEqual(result, 2280)
+
+        result = GetDangerousIngredient(d21Test1)
+        self.assertEqual(result, "mxmxvkd,sqjhc,fvjkl")
+
+        result = GetDangerousIngredient(d21Input)
+        print("Day Twentyone - Part Two: {0}".format(result))
+        self.assertEqual(result, "vfvvnm,bvgm,rdksxt,xknb,hxntcz,bktzrz,srzqtccv,gbtmdb")
+
 
 if __name__ == '__main__':
     unittest.main()
