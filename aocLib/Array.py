@@ -20,3 +20,86 @@ def JumpIndexRollingBuffer(index, n, lengthOfArray):
     :rtype: int
     """
     return (index + n) % lengthOfArray
+
+
+def RotateLeft(puzzleArray):
+    """
+    Rotate an Array:
+
+    #..     ...
+    ... --> ...
+    ...     #..
+
+    :type puzzleArray: list(str)
+    :rtype: list(str)
+    """
+    newArray = [""] * len(puzzleArray[0])
+    for line in puzzleArray:
+        for i, char in enumerate(line):
+            newArray[-i - 1] += char
+    return newArray
+
+
+def FlipVertical(puzzleArray):
+    """
+    Vertical flip an Array:
+
+    #..     ..#
+    ... --> ...
+    #.#     #.#
+
+    :type puzzleArray: list(str)
+    :rtype: list(str)
+    """
+    newArray = []
+    for line in puzzleArray:
+        newArray.append(line[::-1])
+    return newArray
+
+
+def FlipHorizontal(puzzleArray):
+    """
+    Horizontal flip an Array:
+
+    #..     #.#
+    ... --> ...
+    #.#     #..
+
+    :type puzzleArray: list(str)
+    :rtype: list(str)
+    """
+    return puzzleArray[::-1]
+
+
+def ConcatPieces(piece1, piece2):
+    """
+    Concat 2 Arrays:
+
+    ...   ###     ...###
+    ... + ### --> ...###
+    ...   ###     ...###
+
+    :type piece1: list(str)
+    :type piece2: list(str)
+    :rtype: list(str)
+    """
+    for i in range(len(piece1)):
+        piece1[i] += piece2[i]
+    return piece1
+
+
+def RemoveBorder(puzzleArray):
+    """
+    Remove Border:
+
+    ###
+    #.# --> .
+    ###
+
+    :type puzzleArray: list(str)
+    :rtype: list(str)
+    """
+    newArray = []
+    for line in puzzleArray:
+        newArray.append(line[1:-1])
+    return newArray[1:-1]

@@ -286,6 +286,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Nineteen - Part Two: {0}".format(result))
         self.assertEqual(result, 357)
 
+    def testDayTwenty(self):
+        result = GetCornerTiles(d20Test1)
+        self.assertEqual(result, 20899048083289)
+
+        result = GetCornerTiles(d20Input)
+        print("Day Twenty - Part One: {0}".format(result))
+        self.assertEqual(result, 140656720229539)
+
+        result = GetWaterRoughness(d20Test1)
+        self.assertEqual(result, 273)
+
+        result = GetWaterRoughness(d20Input)
+        print("Day Twenty - Part Two: {0}".format(result))
+        self.assertEqual(result, 1885)
+
 
 if __name__ == '__main__':
     unittest.main()

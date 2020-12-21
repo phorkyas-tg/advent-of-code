@@ -18,3 +18,5 @@ from ._16_TicketTranslation import GetInvalidTickets, GetValidTickets
 from ._17_ConwayCubes import GetActiveCubes3D, GetActiveCubes4D
 from ._18_OperationOrder import GetSumOfCalculations, GetSumOfCalculationsAdvanced
 from ._19_MonsterMessages import CountValidMonsterMessages, CountValidMonsterMessagesLoop
+from ._20_JurassicJigsaw import GetCornerTiles, GetWaterRoughness
+from ._21_AllergenAssessment import CountIngredientsWithoutAllergens, GetDangerousIngredient
