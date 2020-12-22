@@ -63,18 +63,18 @@ class AOCTestCases:
         def testDayTwenty(self):
             self.skipTest("Not implemented")
 
-        def testDayTwentyone(self):
+        def testDayTwentyOne(self):
             self.skipTest("Not implemented")
 
-        def testDayTwentytwo(self):
+        def testDayTwentyTwo(self):
             self.skipTest("Not implemented")
 
-        def testDayTwentthree(self):
+        def testDayTwentThree(self):
             self.skipTest("Not implemented")
 
-        def testDayTwentyfour(self):
+        def testDayTwentyFour(self):
             self.skipTest("Not implemented")
 
-        def testDayTwentyfive(self):
+        def testDayTwentyFive(self):
             self.skipTest("Not implemented")
 

@@ -301,20 +301,35 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day Twenty - Part Two: {0}".format(result))
         self.assertEqual(result, 1885)
 
-    def testDayTwentyone(self):
+    def testDayTwentyOne(self):
         result = CountIngredientsWithoutAllergens(d21Test1)
         self.assertEqual(result, 5)
 
         result = CountIngredientsWithoutAllergens(d21Input)
-        print("Day Twentyone - Part One: {0}".format(result))
+        print("Day TwentyOne - Part One: {0}".format(result))
         self.assertEqual(result, 2280)
 
         result = GetDangerousIngredient(d21Test1)
         self.assertEqual(result, "mxmxvkd,sqjhc,fvjkl")
 
         result = GetDangerousIngredient(d21Input)
-        print("Day Twentyone - Part Two: {0}".format(result))
+        print("Day TwentyOne - Part Two: {0}".format(result))
         self.assertEqual(result, "vfvvnm,bvgm,rdksxt,xknb,hxntcz,bktzrz,srzqtccv,gbtmdb")
+
+    def testDayTwentyTwo(self):
+        result = GetWinningScore(d22Test1)
+        self.assertEqual(result, 306)
+
+        result = GetWinningScore(d22Input)
+        print("Day TwentyTwo - Part One: {0}".format(result))
+        self.assertEqual(result, 32783)
+
+        result = GetRecursiveWinningScore(d22Test1)
+        self.assertEqual(result, 291)
+
+        result = GetRecursiveWinningScore(d22Input)
+        print("Day TwentyTwo - Part Two: {0}".format(result))
+        self.assertEqual(result, 33455)
 
 
 if __name__ == '__main__':

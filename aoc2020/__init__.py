@@ -20,3 +20,4 @@ from ._18_OperationOrder import GetSumOfCalculations, GetSumOfCalculationsAdvanc
 from ._19_MonsterMessages import CountValidMonsterMessages, CountValidMonsterMessagesLoop
 from ._20_JurassicJigsaw import GetCornerTiles, GetWaterRoughness
 from ._21_AllergenAssessment import CountIngredientsWithoutAllergens, GetDangerousIngredient
+from ._22_CrabCombat import GetWinningScore, GetRecursiveWinningScore

@@ -2902,3 +2902,72 @@ sbjvmx drmr fjms zfcmvxj xknb bgjjk jxr sdhkr nshgxhq ntkjt thjnz rdksxt xnm vhn
 lvmf ljmjtcz kxshrl ggbcmjmc zsb bvgm qzjgv hlj rfpzm xltv slb thjnz nxxxc nzll srzqtccv rdksxt zgtnsh sghx fcppz tztv fvfpdf cqdb mhvf bktzrz sxgkn dzlrq jdmg qtmnj mzj gbtmdb qrgsbb vfvvnm ptqbrz tsddbt ldvmdh pxls zmgsxd sblmknh qblxkq ztkgdb hxntcz sfj ztv hnk sgjkh fzsqhg zxbfhrs lkjmpqlv hdlkgft fxxczb lmghcl jklfqg xnm (contains wheat)
 zmgsxd hvvtd qqgv gsxk vbn jxr hxntcz sghx thjnz cdvxz rkm fdddkd mdjzx sdhkr pxls pdc ljmjtcz mltghx fvdd zqfh xknb kdlrt bktzrz njvktm gpsgbp mdqfj qblxkq dtlfc psmzk nfhj jklfqg zxbfhrs cqdb cvrd fxxczb qpc mmbbcm fjms mplkr ncs nzll msvx gbtmdb qrfvhh qrgsbb ckzrn hzvh gjbdb lqfts cppld fvfpdf vfvvnm bstlrlb nxbtmj qzzq hcg vhnl ftzdbf mtnx crjjvr jdmg ssnrp zsb lbhrh xnm srzqtccv ptqbrz sbjvmx jfb trpclz gtfhn xrlljb bcqbb bvgm lbbztc mnvn kfkgkjf fkmshtk (contains sesame, nuts)
 """
+
+d22Test1 = """Player 1:
+9
+2
+6
+3
+1
+
+Player 2:
+5
+8
+4
+7
+10"""
+
+d22Input = """Player 1:
+21
+48
+44
+31
+29
+5
+23
+11
+12
+27
+49
+22
+18
+7
+15
+20
+2
+45
+14
+17
+40
+35
+6
+24
+41
+
+Player 2:
+47
+1
+10
+16
+28
+37
+8
+26
+46
+25
+3
+9
+34
+50
+32
+36
+43
+4
+42
+33
+19
+13
+38
+39
+30
+"""

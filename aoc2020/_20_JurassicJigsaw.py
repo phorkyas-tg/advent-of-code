@@ -120,7 +120,7 @@ def CountAllSeaMonster(puzzleArray):
         if count > 0:
             return count
 
-    return None
+    return 0
 
 
 def GetWaterRoughness(puzzleInput):
