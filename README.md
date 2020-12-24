@@ -19,6 +19,8 @@ A list of interesting solutions for further puzzles.
   * the shortest path
 * main2020.testDayTen
   * combination
+* main2020.testDayTwentyThree
+  * Linked List
 
 [python-image]: https://badgen.net/badge/python/3.7/blue
 [aoc-image]: https://badgen.net/badge/aoc/2018-2020/green

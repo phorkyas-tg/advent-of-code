@@ -346,6 +346,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day TwentyThree - Part Two: {0}".format(result))
         self.assertEqual(result, 683486010900)
 
+    def testDayTwentyFour(self):
+        result = GetBlackTiles(d24Test1)
+        self.assertEqual(result, 10)
+
+        result = GetBlackTiles(d24Input)
+        print("Day TwentyFour - Part One: {0}".format(result))
+        self.assertEqual(result, 266)
+
+        result = BlackTilesAfterNDays(d24Test1)
+        self.assertEqual(result, 2208)
+
+        result = BlackTilesAfterNDays(d24Input)
+        print("Day TwentyFour - Part Two: {0}".format(result))
+        self.assertEqual(result, 3627)
+
 
 if __name__ == '__main__':
     unittest.main()
