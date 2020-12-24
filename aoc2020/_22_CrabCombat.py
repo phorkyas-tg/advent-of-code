@@ -19,7 +19,7 @@ def PlayRecursive(player1, player2):
     played = {}
     while len(player1) > 0 and len(player2) > 0:
         # infinite loop stop
-        p = "{0}-{1}".format("".join(list(map(str, player1))), "".join(list(map(str, player2))))
+        p = "{0}-{1}".format(",".join(list(map(str, player1))), ",".join(list(map(str, player2))))
         if p in played:
             return player1, deque([])
         played[p] = 1

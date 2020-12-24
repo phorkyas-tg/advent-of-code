@@ -21,3 +21,4 @@ from ._19_MonsterMessages import CountValidMonsterMessages, CountValidMonsterMes
 from ._20_JurassicJigsaw import GetCornerTiles, GetWaterRoughness
 from ._21_AllergenAssessment import CountIngredientsWithoutAllergens, GetDangerousIngredient
 from ._22_CrabCombat import GetWinningScore, GetRecursiveWinningScore
+from ._23_CrabCups import GetCupLabels, GetCupLabelsAdvanced

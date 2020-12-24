@@ -331,6 +331,21 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day TwentyTwo - Part Two: {0}".format(result))
         self.assertEqual(result, 33455)
 
+    def testDayTwentyThree(self):
+        result = GetCupLabels(d23Test1, 100)
+        self.assertEqual(result, 67384529)
+
+        result = GetCupLabels(d23Input, 100)
+        print("Day TwentyThree - Part One: {0}".format(result))
+        self.assertEqual(result, 32658947)
+
+        result = GetCupLabelsAdvanced(d23Test1, 1000000, 10000000)
+        self.assertEqual(result, 149245887792)
+
+        result = GetCupLabelsAdvanced(d23Input, 1000000, 10000000)
+        print("Day TwentyThree - Part Two: {0}".format(result))
+        self.assertEqual(result, 683486010900)
+
 
 if __name__ == '__main__':
     unittest.main()
