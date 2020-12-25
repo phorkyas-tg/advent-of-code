@@ -3342,3 +3342,7 @@ neseseseseseewwsesee
 swnwseswswswneeswswswswswswwswnwneswsw
 wnwwnwsenenesesewnenwswneesw
 """
+
+d25Test1 = [5764801, 17807724]
+
+d25Input = [8421034, 15993936]

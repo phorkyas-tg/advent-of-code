@@ -23,3 +23,4 @@ from ._21_AllergenAssessment import CountIngredientsWithoutAllergens, GetDangero
 from ._22_CrabCombat import GetWinningScore, GetRecursiveWinningScore
 from ._23_CrabCups import GetCupLabels, GetCupLabelsAdvanced
 from ._24_LobbyLayout import GetBlackTiles, BlackTilesAfterNDays
+from ._25_ComboBreaker import GetEncryptionKey

@@ -361,6 +361,14 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         print("Day TwentyFour - Part Two: {0}".format(result))
         self.assertEqual(result, 3627)
 
+    def testDayTwentyFive(self):
+        result = GetEncryptionKey(d25Test1)
+        self.assertEqual(result, 14897079)
+
+        result = GetEncryptionKey(d25Input)
+        print("Day TwentyFive - Part One: {0}".format(result))
+        self.assertEqual(result, 9177528)
+
 
 if __name__ == '__main__':
     unittest.main()
