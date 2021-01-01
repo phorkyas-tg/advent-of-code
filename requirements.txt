@@ -1,2 +1,2 @@
 anytree==2.7.3
-numpy==1.7.4
+numpy==1.19.4
