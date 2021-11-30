@@ -16,6 +16,16 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         result = RegisterAWithInitRegisterC("aoc2016/input/input_12.txt")
         self.assertEqual(result, 9227663)
 
+    def testDayTwentyThree(self):
+        result = RegisterAWithToggleA("aoc2016/input/input_23_test.txt")
+        self.assertEqual(result, 3)
+
+        result = RegisterAWithToggleA("aoc2016/input/input_23.txt")
+        self.assertEqual(result, 14160)
+
+        result = RegisterAWithToggleB("aoc2016/input/input_23.txt")
+        self.assertEqual(result, 479010720)
+
 
 if __name__ == '__main__':
     unittest.main()
