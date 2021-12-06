@@ -1,8 +1,6 @@
 def getOverlap(lines, onlyHorizontal=True):
     pipes = []
 
-    xMax = 0
-    yMax = 0
     # read pipe coordinates
     for line in lines:
         p1, p2 = line.strip().split(" -> ")
@@ -13,19 +11,10 @@ def getOverlap(lines, onlyHorizontal=True):
         if onlyHorizontal and x1 != x2 and y1 != y2:
             continue
 
-        if max(x1, x2) > xMax:
-            xMax = max(x1, x2)
-
-        if max(y1, y2) > yMax:
-            yMax = max(y1, y2)
-
         pipes.append([(x1, y1), (x2, y2)])
 
     # build board
     board = {}
-    for x in range(xMax + 1):
-        for y in range(yMax + 1):
-            board[(x, y)] = 0
 
     # draw pipes to board
     for pipe in pipes:
@@ -46,14 +35,10 @@ def getOverlap(lines, onlyHorizontal=True):
             y = [pipe[0][1]] * len(x)
 
         for p in zip(x, y):
+            board.setdefault(p, 0)
             board[p] += 1
 
-    overlap = 0
-    # compute overlap
-    for p in board.values():
-        if p >= 2:
-            overlap += 1
-    return overlap
+    return sum([1 for p in board.values() if p > 1])
 
 
 def puzzleA(lines):
