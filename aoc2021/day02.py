@@ -45,5 +45,9 @@ if __name__ == '__main__':
     inputLines = file.readlines()
     file.close()
 
-    print(puzzleA(inputLines))
-    print(puzzleB(inputLines))
+    a = puzzleA(inputLines)
+    b = puzzleB(inputLines)
+    print(a)
+    print(b)
+    assert a == 1804520
+    assert b == 1971095320

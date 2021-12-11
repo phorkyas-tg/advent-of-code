@@ -1,14 +1,16 @@
 def puzzleA(lines):
+    lines = list(map(int, lines))
+
     count = 0
-    lastNumber = lines[0]
     for i in range(1, len(lines)):
-        if lines[i] > lastNumber:
+        if lines[i] > lines[i-1]:
             count += 1
-        lastNumber = lines[i]
     return count
 
 
 def puzzleB(lines):
+    lines = list(map(int, lines))
+
     newArray = []
     for i in range(len(lines) - 2):
         newArray.append(lines[i] + lines[i+1] + lines[i+2])
@@ -18,8 +20,11 @@ def puzzleB(lines):
 if __name__ == '__main__':
     file = open("input\\input_01.txt", 'r')
     inputLines = file.readlines()
-    nums = list(map(int, inputLines))
     file.close()
 
-    print(puzzleA(nums))
-    print(puzzleB(nums))
+    a = puzzleA(inputLines)
+    b = puzzleB(inputLines)
+    print(a)
+    print(b)
+    assert a == 1292
+    assert b == 1262

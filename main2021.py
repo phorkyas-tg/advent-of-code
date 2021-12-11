@@ -1,4 +1,5 @@
-from aoc2021 import day01, day02, day03, day04, day05, day06, day07, day08, day09, day10
+from aoc2021 import (day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11,
+                     day12)
 
 if __name__ == '__main__':
 
