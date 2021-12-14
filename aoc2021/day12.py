@@ -1,37 +1,34 @@
-def isVisitedA(nextMove, currentPath):
-    return nextMove.islower() and nextMove in currentPath
+def isVisitedA(nextCave, lowerCaves):
+    return nextCave in lowerCaves and lowerCaves[nextCave] > 1
 
 
-def isVisitedB(nextMove, currentPath):
-    if nextMove.islower():
-        lowerCaves = {}
-        for cave in currentPath.split("-"):
-            if cave.islower():
-                lowerCaves.setdefault(cave, 0)
-                lowerCaves[cave] += 1
-
-        if max(lowerCaves.values()) > 1 and nextMove in lowerCaves:
-            return True
-    return False
+def isVisitedB(nextCave, lowerCaves):
+    return sum(lowerCaves.values()) > len(lowerCaves.keys()) + 1
 
 
-def getPathsRecursive(board, currentPath, paths, isVisited):
-    start = currentPath.split("-")[-1]
-    nextMoves = board[start]
+def getPathsRecursive(board, currentPath, lowerCaves, paths, isVisited):
+    nextCaves = board[currentPath[-1]]
 
-    for nextMove in nextMoves:
-        if nextMove == "start":
+    for nextCave in nextCaves:
+        if nextCave == "start":
             continue
 
-        newPath = currentPath + "-" + nextMove
-        if nextMove == "end":
-            paths.setdefault(newPath, len(newPath.split("-")))
+        newLowerCaves = lowerCaves.copy()
+        if nextCave.islower():
+            newLowerCaves.setdefault(nextCave, 0)
+            newLowerCaves[nextCave] += 1
+
+        if isVisited(nextCave, newLowerCaves):
             continue
 
-        if isVisited(nextMove, currentPath):
+        newPath = currentPath.copy()
+        newPath.append(nextCave)
+
+        if nextCave == "end":
+            paths.setdefault("-".join(newPath), newPath)
             continue
 
-        getPathsRecursive(board, newPath, paths, isVisited)
+        getPathsRecursive(board, newPath, newLowerCaves, paths, isVisited)
 
 
 def puzzleA(lines):
@@ -47,7 +44,7 @@ def puzzleA(lines):
             board[dest].append(source)
 
     paths = {}
-    getPathsRecursive(board, "start", paths, isVisitedA)
+    getPathsRecursive(board, ["start"], {"start": 1}, paths, isVisitedA)
     return len(paths.keys())
 
 
@@ -64,7 +61,7 @@ def puzzleB(lines):
             board[dest].append(source)
 
     paths = {}
-    getPathsRecursive(board, "start", paths, isVisitedB)
+    getPathsRecursive(board, ["start"], {"start": 1}, paths, isVisitedB)
     return len(paths.keys())
 
 

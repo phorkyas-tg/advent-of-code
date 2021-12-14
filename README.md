@@ -22,6 +22,6 @@ A list of interesting solutions for further puzzles.
 * main2020.testDayTwentyThree
   * Linked List
 
-[python-image]: https://badgen.net/badge/python/3.7/blue
-[aoc-image]: https://badgen.net/badge/aoc/2018-2020/green
+[python-image]: https://badgen.net/badge/python/3.9/blue
+[aoc-image]: https://badgen.net/badge/aoc/2016-2021/green
 [aoc-url]: https://adventofcode.com
