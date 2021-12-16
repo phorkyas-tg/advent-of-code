@@ -21,6 +21,8 @@ A list of interesting solutions for further puzzles.
   * combination
 * main2020.testDayTwentyThree
   * Linked List
+* main2021.day15
+  * shortest weighted path
 
 [python-image]: https://badgen.net/badge/python/3.9/blue
 [aoc-image]: https://badgen.net/badge/aoc/2016-2021/green
