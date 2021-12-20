@@ -10,7 +10,7 @@ def shift(scannerPos, p1):
     return scannerPos[0] - p1[0], scannerPos[1] - p1[1], scannerPos[2] - p1[2]
 
 
-def diffScanners(scnr, scannerN, scanner0=0):
+def diffScanners(scnr, scannerN, scanner0=0, debug=False):
     p0Set = set(scnr[scanner0])
 
     # rotate the axis in all possible ways
@@ -34,7 +34,8 @@ def diffScanners(scnr, scannerN, scanner0=0):
                     if max(scannerPosCount.values()) >= 12:
                         for scannerPos, count in scannerPosCount.items():
                             if count == max(scannerPosCount.values()):
-                                print("Scanner {0}: {1}".format(scannerN, scannerPos))
+                                if debug:
+                                    print("Scanner {0}: {1}".format(scannerN, scannerPos))
                                 # shift all rotated points by the scanner position
                                 pNShift = set([shift(scannerPos, p1) for p1 in pNRot])
                                 scnr[scanner0].extend(list(pNShift - p0Set))
@@ -42,7 +43,7 @@ def diffScanners(scnr, scannerN, scanner0=0):
     return None, None
 
 
-def puzzleA(lines):
+def puzzleA(lines, debug=False):
     scannerNumber = 0
     scanners = {scannerNumber: []}
     for line in lines:
@@ -67,7 +68,7 @@ def puzzleA(lines):
             if i in scannedBeacons:
                 continue
 
-            scanner0, scanner1 = diffScanners(scanners, i)
+            scanner0, scanner1 = diffScanners(scanners, i, debug=debug)
             if scanner0 is None:
                 continue
 
@@ -101,7 +102,7 @@ if __name__ == '__main__':
     # this one takes a while
     from datetime import datetime
     start = datetime.now()
-    a, scannerPositions = puzzleA(inputLines)
+    a, scannerPositions = puzzleA(inputLines, debug=True)
     b = puzzleB(scannerPositions)
     stop = datetime.now()
     print("time: {0}", stop - start)

@@ -1,5 +1,5 @@
 from aoc2021 import (day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11,
-                     day12, day13, day14, day15, day16)
+                     day12, day13, day14, day15, day16, day17, day18, day19, day20)
 
 if __name__ == '__main__':
 
@@ -19,8 +19,13 @@ if __name__ == '__main__':
         file.close()
 
         a = b = None
-        exec("a = day{0}.puzzleA(inputLines)".format(day))
-        exec("b = day{0}.puzzleB(inputLines)".format(day))
+
+        if day == "19":
+            exec("a, scannerPositions = day19.puzzleA(inputLines, debug=False)")
+            exec("b = day19.puzzleB(scannerPositions)")
+        else:
+            exec("a = day{0}.puzzleA(inputLines)".format(day))
+            exec("b = day{0}.puzzleB(inputLines)".format(day))
 
         print("Day {0} - Puzzle A: {1}".format(day, a))
         print("Day {0} - Puzzle B: {1}".format(day, b))
