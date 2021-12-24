@@ -6,6 +6,27 @@ from aoc2016 import *
 
 class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
 
+    def testDayOne(self):
+        result = GetDistanceFromStart("aoc2016/input/input_01.txt")
+        self.assertEqual(result, 279)
+
+        result = GetDistanceVisitedTwice("aoc2016/input/input_01.txt")
+        self.assertEqual(result, 163)
+
+    def testDayTwo(self):
+        result = GetKeyCode("aoc2016/input/input_02.txt")
+        self.assertEqual(result, 69642)
+
+        result = GetAdvancedKeyCode("aoc2016/input/input_02.txt")
+        self.assertEqual(result, "8CB23")
+
+    def testDayThree(self):
+        result = GetValidTriangles("aoc2016/input/input_03.txt")
+        self.assertEqual(result, 993)
+
+        result = GetValidVerticalTriangles("aoc2016/input/input_03.txt")
+        self.assertEqual(result, 1849)
+
     def testDayTwelve(self):
         result = RegisterA("aoc2016/input/input_12_test.txt")
         self.assertEqual(result, 42)
