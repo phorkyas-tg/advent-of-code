@@ -1,12 +1,13 @@
 from aoc2021 import (day01, day02, day03, day04, day05, day06, day07, day08, day09, day10, day11,
-                     day12, day13, day14, day15, day16, day17, day18, day19, day20)
+                     day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22,
+                     day23, day24, day25)
 
 if __name__ == '__main__':
 
     print("results for aoc 2021")
     print("")
 
-    for i in range(24):
+    for i in range(25):
         day = "0" + str(i + 1) if i < 9 else str(i + 1)
 
         try:
