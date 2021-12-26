@@ -58,7 +58,3 @@ def ShiftCypher(file):
         if decriptedName == "northpole object storage":
             return num
     return 0
-
-
-
-

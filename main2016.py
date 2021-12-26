@@ -34,6 +34,13 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         result = ShiftCypher("aoc2016/input/input_04.txt")
         self.assertEqual(result, 324)
 
+    def testDayFive(self):
+        result = GetMDF5Password("reyedfim")
+        self.assertEqual(result, "f97c354d")
+
+        result = GetAdvancedMDF5Password("reyedfim")
+        self.assertEqual(result, "863dde27")
+
     def testDayTwelve(self):
         result = RegisterA("aoc2016/input/input_12_test.txt")
         self.assertEqual(result, 42)
