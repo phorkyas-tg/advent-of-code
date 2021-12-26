@@ -27,6 +27,13 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         result = GetValidVerticalTriangles("aoc2016/input/input_03.txt")
         self.assertEqual(result, 1849)
 
+    def testDayFour(self):
+        result = SumValidRoomIds("aoc2016/input/input_04.txt")
+        self.assertEqual(result, 245102)
+
+        result = ShiftCypher("aoc2016/input/input_04.txt")
+        self.assertEqual(result, 324)
+
     def testDayTwelve(self):
         result = RegisterA("aoc2016/input/input_12_test.txt")
         self.assertEqual(result, 42)
