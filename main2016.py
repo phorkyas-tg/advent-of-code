@@ -41,6 +41,27 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
         result = GetAdvancedMDF5Password("reyedfim")
         self.assertEqual(result, "863dde27")
 
+    def testDaySix(self):
+        result = GetErrorCorrectedCode("aoc2016/input/input_06.txt")
+        self.assertEqual(result, "mshjnduc")
+
+        result = GetErrorCorrectedCodeLeastCommon("aoc2016/input/input_06.txt")
+        self.assertEqual(result, "apfeeebz")
+
+    def testDaySeven(self):
+        result = CountTLS("aoc2016/input/input_07.txt")
+        self.assertEqual(result, 115)
+
+        result = CountSSL("aoc2016/input/input_07.txt")
+        self.assertEqual(result, 231)
+
+    def testDayNine(self):
+        result = GetDecombressedLength("aoc2016/input/input_09.txt")
+        self.assertEqual(result, 107035)
+
+        result = GetFullDecombressedLength("aoc2016/input/input_09.txt")
+        self.assertEqual(result, 11451628995)
+
     def testDayTwelve(self):
         result = RegisterA("aoc2016/input/input_12_test.txt")
         self.assertEqual(result, 42)
@@ -60,6 +81,13 @@ class TestAdventOfCode2020(AOCTestCases.TestAdventOfCode):
 
         result = RegisterAWithToggleB("aoc2016/input/input_23.txt")
         self.assertEqual(result, 479010720)
+
+    def testDayTwentyFour(self):
+        result = GetFewestNumberOfSteps("aoc2016/input/input_24.txt")
+        self.assertEqual(result, 428)
+
+        result = GetFewestNumberOfStepsReturn("aoc2016/input/input_24.txt")
+        self.assertEqual(result, 680)
 
 
 if __name__ == '__main__':
