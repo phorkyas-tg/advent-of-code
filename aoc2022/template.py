@@ -10,11 +10,11 @@ def puzzleB(lines):
 
 if __name__ == '__main__':
     day = "01"
-    script_dir = os.path.dirname(__file__)
-    rel_path = "input/input_{0}.txt".format(day)
-    abs_file_path = os.path.join(script_dir, rel_path)
+    currentPath = os.path.dirname(__file__)
+    relPath = "input/input_{0}.txt".format(day)
+    absPath = os.path.join(currentPath, relPath)
     
-    with open(abs_file_path, encoding = 'utf-8') as file:
+    with open(absPath, encoding = 'utf-8') as file:
         inputLines = file.readlines()
 
     a = puzzleA(inputLines)
