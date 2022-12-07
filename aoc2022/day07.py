@@ -19,19 +19,13 @@ def getDirs(lines):
             dirs[currentDir] += int(commands[0])
     return dirs
 
+
 def getDirTotalSize(dirs):
     dirTotalSize = {}
-    for key, value in dirs.items():
-        size = value
+    for currentDir in dirs.keys():
+        dirTotalSize[currentDir] = sum([size for dirName, size in dirs.items()
+                                       if dirName.startswith(currentDir)])
 
-        for subKey, subValue in dirs.items():
-            if subKey == key:
-                continue
-
-            if subKey.startswith(key):
-                size += subValue
-        
-        dirTotalSize[key] = size
     return dirTotalSize
 
 
