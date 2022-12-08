@@ -1,5 +1,6 @@
 import os
 
+
 def puzzleA(lines):
     trees = {}
     visibleTrees = {}
@@ -11,58 +12,36 @@ def puzzleA(lines):
 
     xMax, yMax = max(trees.keys())
 
-    for y in range(yMax + 1):
-        highestTree = -1
-        for x in range(xMax + 1):
-            value = trees[(x, y)]
+    def setVisibleTrees(pos, highestTree):
+        value = trees[pos]
 
-            if x == 0 or x == xMax or value > highestTree:
-                visibleTrees[(x, y)] = 0
+        if pos[0] == 0 or pos[0] == xMax or pos[1] == 0 or pos[1] == yMax or value > highestTree:
+            visibleTrees[pos] = 0
 
-            if highestTree < value:
-                highestTree = value
-            if value == 9:
-                break
+        if highestTree < value:
+            highestTree = value
+        return highestTree
 
-    for y in range(yMax + 1):
-        highestTree = -1
-        for x in range(xMax, 0 - 1, -1):
-            value = trees[(x, y)]
+    def lookAtTreesHorizontal(x1, x2, xStep):
+        for _y in range(yMax + 1):
+            highestTree = -1
+            for _x in range(x1, x2, xStep):
+                highestTree = setVisibleTrees((_x, _y), highestTree)
 
-            if x == 0 or x == xMax or value > highestTree:
-                visibleTrees[(x, y)] = 0
+    def lookAtTreesVertical(y1, y2, yStep):
+        for _x in range(xMax + 1):
+            highestTree = -1
+            for _y in range(y1, y2, yStep):
+                highestTree = setVisibleTrees((_x, _y), highestTree)
 
-            if highestTree < value:
-                highestTree = value
-            if value == 9:
-                break
-
-    for x in range(xMax + 1):
-        highestTree = -1
-        for y in range(yMax + 1):
-            value = trees[(x, y)]
-
-            if y == 0 or y == yMax or value > highestTree:
-                visibleTrees[(x, y)] = 0
-
-            if highestTree < value:
-                highestTree = value
-            if value == 9:
-                break
-
-    for x in range(xMax + 1):
-        highestTree = -1
-        for y in range(yMax, 0 - 1, -1):
-            value = trees[(x, y)]
-
-            if y == 0 or y == yMax or value > highestTree:
-                visibleTrees[(x, y)] = 0
-
-            if highestTree < value:
-                highestTree = value
-            if value == 9:
-                break
-        
+    # from left
+    lookAtTreesHorizontal(0, xMax + 1, 1)
+    # from right
+    lookAtTreesHorizontal(xMax, -1, -1)
+    # from up
+    lookAtTreesVertical(0, yMax + 1, 1)
+    # from down
+    lookAtTreesVertical(yMax, -1, -1)
 
     return len(visibleTrees.keys()) - sum(visibleTrees.values())
 
@@ -79,36 +58,36 @@ def puzzleB(lines):
     xMax, yMax = max(trees.keys())
 
     for pos, value in trees.items():
-        r = l = u = d = 1
+        right = left = up = down = 1
 
         if pos[0] == 0 or pos[0] == xMax or pos[1] == 0 or pos[1] == yMax:
             continue
 
         for x in range(pos[0] + 1, xMax):
             if value > trees[(x, pos[1])]:
-                r += 1
+                right += 1
             else:
                 break
         
         for x in range(pos[0] - 1, 0, -1):
             if value > trees[(x, pos[1])]:
-                l += 1
+                left += 1
             else:
                 break
 
         for y in range(pos[1] + 1, yMax):
             if value > trees[(pos[0], y)]:
-                d += 1
+                down += 1
             else:
                 break
 
         for y in range(pos[1] - 1, 0, -1):
             if value > trees[(pos[0], y)]:
-                u += 1
+                up += 1
             else:
                 break
 
-        visibleTrees[pos] = r * l * u * d
+        visibleTrees[pos] = right * left * up * down
 
     return max(visibleTrees.values())
 
