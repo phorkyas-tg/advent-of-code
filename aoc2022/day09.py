@@ -54,9 +54,7 @@ def puzzleB(lines):
         command, steps = line.strip().split(" ")
         for __ in range(int(steps)):
             tempLinks = [moveHead(links[0], command)]
-            for i, tail in enumerate(links):
-                if i == 0:
-                    continue
+            for tail in links[1:]:
                 tempLinks.append(moveTail(tempLinks[-1], tail))
             links = tempLinks
 
