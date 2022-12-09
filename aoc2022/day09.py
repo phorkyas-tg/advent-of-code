@@ -2,24 +2,23 @@ import os
 
 
 def moveTail(head, tail):
+    distanceX = head[0] - tail[0]
+    distanceY = head[1] - tail[1]
+
     if head[1] == tail[1]:
-        distance = head[0] - tail[0]
-        if abs(distance) not in (0, 1):
-            tail = (int(tail[0] + (distance / abs(distance))), tail[1])
+        if abs(distanceX) not in (0, 1):
+            tail = (int(tail[0] + (distanceX / abs(distanceX))), tail[1])
     elif head[0] == tail[0]:
-        distance = head[1] - tail[1]
-        if abs(distance) not in (0, 1):
-            tail = (tail[0], int(tail[1] + (distance / abs(distance))))
+        if abs(distanceY) not in (0, 1):
+            tail = (tail[0], int(tail[1] + (distanceY / abs(distanceY))))
     else:
-        distanceX = head[0] - tail[0]
-        distanceY = head[1] - tail[1]
         if abs(distanceX) not in (0, 1) or abs(distanceY) not in (0, 1):
             tail = (int(tail[0] + (distanceX / abs(distanceX))),
                     int(tail[1] + (distanceY / abs(distanceY))))
     return tail
 
 
-def processCommand(command, head):
+def moveHead(head, command):
     if command == "R":
         head = (head[0] + 1, head[1])
     elif command == "L":
@@ -44,7 +43,7 @@ def puzzleA(lines):
     for line in lines:
         command, steps = line.strip().split(" ")
         for __ in range(int(steps)):
-            head = processCommand(command, head)
+            head = moveHead(head, command)
             tail = moveTail(head, tail)
 
             visites.add(tail)
@@ -53,19 +52,19 @@ def puzzleA(lines):
 
 def puzzleB(lines):
     tails = [(0, 0)] * 10
-    visites = {tails[9]}
+    visites = {tails[-1]}
 
     for line in lines:
         command, steps = line.strip().split(" ")
         for __ in range(int(steps)):
-            tempTails = [processCommand(command, tails[0])]
+            tempTails = [moveHead(tails[0], command)]
             for i, tail in enumerate(tails):
                 if i == 0:
                     continue
                 tempTails.append(moveTail(tempTails[-1], tail))
             tails = tempTails
 
-            visites.add(tails[9])
+            visites.add(tails[-1])
     return len(visites)
 
 
