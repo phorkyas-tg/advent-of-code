@@ -1,5 +1,6 @@
 import os
 
+
 def getSumOfCalories(lines):
     sumOfCalories = []
 
@@ -12,6 +13,7 @@ def getSumOfCalories(lines):
             currentCalories += int(line)
     
     return sumOfCalories
+
 
 def puzzleA(lines):
     return max(getSumOfCalories(lines))
@@ -35,7 +37,7 @@ if __name__ == '__main__':
     relPath = "input/input_{0}.txt".format(day)
     absPath = os.path.join(currentPath, relPath)
     
-    with open(absPath, encoding = 'utf-8') as file:
+    with open(absPath, encoding='utf-8') as file:
         inputLines = file.readlines()
 
     a = puzzleA(inputLines)
