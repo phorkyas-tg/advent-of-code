@@ -2,19 +2,15 @@ import os
 
 
 def moveTail(head, tail):
-    distanceX = head[0] - tail[0]
-    distanceY = head[1] - tail[1]
+    linkDistX = head[0] - tail[0]
+    linkDistY = head[1] - tail[1]
 
-    if head[1] == tail[1]:
-        if abs(distanceX) not in (0, 1):
-            tail = (int(tail[0] + (distanceX / abs(distanceX))), tail[1])
-    elif head[0] == tail[0]:
-        if abs(distanceY) not in (0, 1):
-            tail = (tail[0], int(tail[1] + (distanceY / abs(distanceY))))
-    else:
-        if abs(distanceX) not in (0, 1) or abs(distanceY) not in (0, 1):
-            tail = (int(tail[0] + (distanceX / abs(distanceX))),
-                    int(tail[1] + (distanceY / abs(distanceY))))
+    moveDistX = 0 if linkDistX == 0 else linkDistX / abs(linkDistX)
+    moveDistY = 0 if linkDistY == 0 else linkDistY / abs(linkDistY)
+
+    if abs(linkDistX) > 1 or abs(linkDistY) > 1:
+        tail = (int(tail[0] + moveDistX),
+                int(tail[1] + moveDistY))
     return tail
 
 
