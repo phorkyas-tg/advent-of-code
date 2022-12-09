@@ -51,20 +51,20 @@ def puzzleA(lines):
 
 
 def puzzleB(lines):
-    tails = [(0, 0)] * 10
-    visites = {tails[-1]}
+    links = [(0, 0)] * 10
+    visites = {links[-1]}
 
     for line in lines:
         command, steps = line.strip().split(" ")
         for __ in range(int(steps)):
-            tempTails = [moveHead(tails[0], command)]
-            for i, tail in enumerate(tails):
+            tempLinks = [moveHead(links[0], command)]
+            for i, tail in enumerate(links):
                 if i == 0:
                     continue
-                tempTails.append(moveTail(tempTails[-1], tail))
-            tails = tempTails
+                tempLinks.append(moveTail(tempLinks[-1], tail))
+            links = tempLinks
 
-            visites.add(tails[-1])
+            visites.add(links[-1])
     return len(visites)
 
 
