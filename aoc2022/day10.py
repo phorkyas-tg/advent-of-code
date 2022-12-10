@@ -28,7 +28,6 @@ def puzzleA(lines):
 
 def puzzleB(lines):
     registerX = 1
-    cycleCount = 0
 
     screen = ""
     row = ""
@@ -47,14 +46,12 @@ def puzzleB(lines):
         command = line.strip()[:4]
 
         row, screen = addPixelToRow(row, screen)
-        cycleCount += 1
 
         if command == "addx":
             row, screen = addPixelToRow(row, screen)
 
             number = int(line.strip()[4:])
             registerX += number
-            cycleCount += 1
 
     return screen
 
