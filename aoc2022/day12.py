@@ -23,38 +23,37 @@ def dijkstraHeap(length, maxX, maxY, startPos):
 
     https://brilliant.org/wiki/dijkstras-short-path-finder/
     """
+    queue = []
+    heapq.heapify(queue)
+    heapq.heappush(queue, (0, startPos))
 
-    s = {}
-
-    cache = []
-    heapq.heapify(cache)
-    heapq.heappush(cache, (0, startPos))
-
+    visited = {}
+    unvisited = {}
     dist = {}
-    q = {}
+
     for y in range(maxY + 1):
         for x in range(maxX + 1):
             dist[(x, y)] = None
-            q[(x, y)] = "#"
+            unvisited[(x, y)] = "#"
 
     dist[startPos] = 0
 
-    while len(cache) > 0:
-        v, pos = heapq.heappop(cache)
+    while len(queue) > 0:
+        __, pos = heapq.heappop(queue)
 
-        if pos in s:
+        if pos in visited:
             continue
-        s[pos] = q.pop(pos)
+        visited[pos] = unvisited.pop(pos)
 
-        d = dist.get(pos)
-        for u in getAdjacent(pos, length):
-            if u in s:
+        currentDistanceToStart = dist.get(pos)
+        for adjacentPos in getAdjacent(pos, length):
+            if adjacentPos in visited:
                 continue
 
-            alt = d + 1
-            if dist[u] is None or alt < dist[u]:
-                dist[u] = alt
-                heapq.heappush(cache, (alt, u))
+            priority = currentDistanceToStart + 1
+            if dist[adjacentPos] is None or priority < dist[adjacentPos]:
+                dist[adjacentPos] = priority
+                heapq.heappush(queue, (priority, adjacentPos))
     return dist
 
 
