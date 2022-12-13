@@ -13,12 +13,13 @@ def compare(left, right):
             try:
                 setIndex = compare(left[i], right[i])
             except IndexError:
+                # print("Right side ran out of items, so inputs are not in the right order")
                 setIndex = -1
 
             if setIndex in (-1, 1):
                 return setIndex
-        # left side ran out of items
         if setIndex == 0 and len(left) < len(right):
+            # print("Left side ran out of items, so inputs are in the right order")
             return 1
 
     elif isinstance(left, int) and isinstance(right, int):
@@ -32,12 +33,14 @@ def compare(left, right):
 
     elif isinstance(left, list) and isinstance(right, int):
         right = [right]
+        # print("Mixed types; convert right to {0} and retry comparison".format(right))
         setIndex = compare(left, right)
         if setIndex in (-1, 1):
             return setIndex
 
     elif isinstance(left, int) and isinstance(right, list):
         left = [left]
+        # print("Mixed types; convert right to {0} and retry comparison".format(left))
         setIndex = compare(left, right)
         if setIndex in (-1, 1):
             return setIndex
