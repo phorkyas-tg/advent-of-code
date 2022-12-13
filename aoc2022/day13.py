@@ -1,10 +1,11 @@
 import os
+from functools import cmp_to_key
 
 
 def compare(left, right):
     # 0 = left == right or unknown
-    # 1 = left < right
-    # -1 = left > right
+    # -1 = left < right
+    # 1 = left > right
     result = 0
 
     # print("Compare {0} vs {1}".format(left, right))
@@ -14,22 +15,22 @@ def compare(left, right):
                 result = compare(left[i], right[i])
             except IndexError:
                 # print("Right side ran out of items, so inputs are not in the right order")
-                result = -1
+                result = 1
 
             if result in (-1, 1):
                 return result
         if result == 0 and len(left) < len(right):
             # print("Left side ran out of items, so inputs are in the right order")
-            return 1
+            return -1
 
     elif isinstance(left, int) and isinstance(right, int):
         if left < right:
             # print("Left side is smaller, so inputs are in the right order")
-            return 1
+            return -1
         elif left == right:
             return 0
         # print("Right side is smaller, so inputs are not in the right order")
-        return -1
+        return 1
 
     elif isinstance(left, list) and isinstance(right, int):
         right = [right]
@@ -56,7 +57,7 @@ def bubbleSort(packets):
         for i in range(1, len(packets)):
             comp = compare(packets[i-1], packets[i])
             # swap
-            if comp == -1:
+            if comp == 1:
                 p1 = packets[i-1]
                 p2 = packets[i]
 
@@ -85,7 +86,7 @@ def puzzleA(lines):
     for i, pair in enumerate(packetPairs):
         comp = compare(pair[0], pair[1])
 
-        if comp == 1:
+        if comp == -1:
             indices.append(i + 1)
 
     return sum(indices)
@@ -100,7 +101,9 @@ def puzzleB(lines):
 
         packets.append(eval(line.strip()))
 
-    packets = bubbleSort(packets)
+    packets.sort(key=cmp_to_key(lambda left, right: compare(left, right)))
+    # As an alternative you can use bubble sort
+    # packets = bubbleSort(packets)
 
     result = 1
     for i, p in enumerate(packets):
