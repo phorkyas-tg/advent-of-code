@@ -78,14 +78,14 @@ def puzzleA(lines):
     if pair:
         packetPairs.append(pair)
 
-    indicies = []
-    for indicie, pair in enumerate(packetPairs):
+    indices = []
+    for i, pair in enumerate(packetPairs):
         setIndex = compare(pair[0], pair[1])
 
         if setIndex == 1:
-            indicies.append(indicie + 1)
+            indices.append(i + 1)
 
-    return sum(indicies)
+    return sum(indices)
 
 
 def puzzleB(lines):
