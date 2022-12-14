@@ -101,7 +101,7 @@ def puzzleB(lines):
 
         packets.append(eval(line.strip()))
 
-    packets.sort(key=cmp_to_key(lambda left, right: compare(left, right)))
+    packets.sort(key=cmp_to_key(compare))
     # As an alternative you can use bubble sort
     # packets = bubbleSort(packets)
 
