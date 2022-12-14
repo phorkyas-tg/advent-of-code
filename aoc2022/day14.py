@@ -36,7 +36,7 @@ def newSand(rockMap, maxY):
                 return False
             return True
 
-        # is the resting place falling of the cliff?
+        # is the sand falling of the cliff?
         if sandPos[1] > maxY:
             return False
 
