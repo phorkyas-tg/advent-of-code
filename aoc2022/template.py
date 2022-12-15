@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 
 def puzzleA(lines):
@@ -18,9 +19,12 @@ if __name__ == '__main__':
     with open(absPath, encoding='utf-8') as file:
         inputLines = file.readlines()
 
+    start = datetime.now()
     a = puzzleA(inputLines)
     b = puzzleB(inputLines)
+    stop = datetime.now()
     print(a)
     print(b)
+    print("time: {0}".format(stop - start))
     assert a == 0
     assert b == 0
