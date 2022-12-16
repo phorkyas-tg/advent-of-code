@@ -315,5 +315,5 @@ if __name__ == '__main__':
 
     stop = datetime.now()
     print("time: {0}".format(stop - start))
-    # assert a == 2265
-    # assert b == 2811
+    assert a == 2265
+    assert b == 2811
