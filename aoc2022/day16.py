@@ -258,35 +258,13 @@ def puzzleA(lines):
 
 
 def puzzleB(lines):
-    paths = {}
-    flowRates = {}
-    valves = []
-
-    for line in lines:
-        flowRate = list(map(int, re.findall('[-+]?[0-9]+', line)))[0]
-        valve = line.strip().split("has flow")[0].split()[1].strip()
-        flowRates[valve] = flowRate
-        valves.append(valve)
-        try:
-            nextValves = line.strip().split("to valves")[1].strip().split(", ")
-        except IndexError:
-            nextValves = [line.strip().split("to valve")[1].strip()]
-
-        paths[valve] = nextValves
+    paths, flowRates, valves, cachedPaths = parse(lines)
 
     valvePairs = []
     for v1 in valves:
         for v2 in valves:
             if v1 != v2:
                 valvePairs.append((v1, v2))
-
-    cachedPaths = {}
-    for v1 in valves:
-        for v2 in valves:
-            newPath = dijkstraHeap(paths, startPos=v1, stopPos=v2)
-            inBetween = ["__"] * (len(newPath) - 2)
-            inBetween.append(newPath[-1])
-            cachedPaths[(v1, v2)] = inBetween
 
     complete = []
     knownPaths = [[["AA", "AA"]]]
