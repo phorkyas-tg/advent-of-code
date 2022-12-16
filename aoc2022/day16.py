@@ -176,7 +176,8 @@ def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache
 
                 visitedBeforeMe = ";".join(newKnownPathMe[:-1])
                 visitedBeforeEle = ";".join(newKnownPathEle[:-1])
-                if valve[0] in visitedBeforeMe or valve[1] in visitedBeforeEle:
+                if valve[0] in visitedBeforeMe or valve[1] in visitedBeforeEle \
+                        or valve[1] in visitedBeforeMe or valve[0] in visitedBeforeEle:
                     continue
 
                 length = max([len(newKnownPathMe), len(newKnownPathEle)])
@@ -275,9 +276,9 @@ if __name__ == '__main__':
         inputLines = file.readlines()
 
     start = datetime.now()
-    # a = puzzleA(inputLines)
+    a = puzzleA(inputLines)
     b = puzzleB(inputLines)
-    # print(a)
+    print(a)
     print(b)
 
     stop = datetime.now()
