@@ -141,31 +141,20 @@ def calcPressure(flowRates, path, steps, debug=False):
 
 def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache, maxLength,
                    cachedPaths):
-    newKnownPaths = []
+    newKnownPaths = {}
 
-    if len(knownPaths) == 0:
+    if len(knownPaths.keys()) == 0:
         return complete
 
-    for knownPath in knownPaths:
+    for knownPath in knownPaths.values():
         if len(knownPath) >= maxLength:
             complete.append(knownPath.copy())
-            continue
-
-        op = False
-        if knownPath[-1][0] != "__" and knownPath[-1][1] != "__":
-            op = True
-        vis = ";".join(sorted(set([v[0] for v in knownPath]))) + str(op)
-        pres = calcPressureB(flowRates, knownPath, maxLength)
-        if pres < pressureCache.get(vis, 0):
             continue
 
         isComplete = True
         for valve in valves:
 
             if list(valve) not in knownPath:
-                # only go the path if the target valve has a flow rate
-                if flowRates[valve[0]] == 0 or flowRates[valve[1]] == 0:
-                    continue
 
                 newKnownPathMe = [val[0] for val in knownPath]
                 newKnownPathEle = [val[1] for val in knownPath]
@@ -204,7 +193,7 @@ def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache
 
                 if pressure > pressureCache.get(visitedMe, 0):
                     pressureCache[visitedMe] = pressure
-                    newKnownPaths.append(newKnownPath)
+                    newKnownPaths[visitedMe] = newKnownPath
 
                 isComplete = False
 
@@ -263,11 +252,11 @@ def puzzleB(lines):
     valvePairs = []
     for v1 in valves:
         for v2 in valves:
-            if v1 != v2:
+            if v1 != v2 and flowRates[v1] > 0 and flowRates[v2] > 0:
                 valvePairs.append((v1, v2))
 
     complete = []
-    knownPaths = [[["AA", "AA"]]]
+    knownPaths = {"AATrue": [["AA", "AA"]]}
     pressureCache = {}
 
     completePathsB(valvePairs, paths, knownPaths, complete, flowRates, pressureCache,
@@ -286,9 +275,9 @@ if __name__ == '__main__':
         inputLines = file.readlines()
 
     start = datetime.now()
-    a = puzzleA(inputLines)
+    # a = puzzleA(inputLines)
     b = puzzleB(inputLines)
-    print(a)
+    # print(a)
     print(b)
 
     stop = datetime.now()
