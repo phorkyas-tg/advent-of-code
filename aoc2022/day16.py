@@ -4,6 +4,33 @@ import heapq
 from datetime import datetime
 
 
+def parse(lines):
+    paths = {}
+    flowRates = {}
+    valves = []
+    cachedPaths = {}
+
+    for line in lines:
+        flowRate = list(map(int, re.findall('[-+]?[0-9]+', line)))[0]
+        valve = line.strip().split("has flow")[0].split()[1].strip()
+        flowRates[valve] = flowRate
+        valves.append(valve)
+        try:
+            nextValves = line.strip().split("to valves")[1].strip().split(", ")
+        except IndexError:
+            nextValves = [line.strip().split("to valve")[1].strip()]
+
+        paths[valve] = nextValves
+
+    for v1 in valves:
+        for v2 in valves:
+            newPath = dijkstraHeap(paths, startPos=v1, stopPos=v2)
+            inBetween = ["__"] * (len(newPath) - 2)
+            inBetween.append(newPath[-1])
+            cachedPaths[(v1, v2)] = inBetween
+    return paths, flowRates, valves, cachedPaths
+
+
 def dijkstraHeap(paths, startPos, stopPos):
     queue = []
     heapq.heapify(queue)
@@ -39,10 +66,8 @@ def dijkstraHeap(paths, startPos, stopPos):
 
 
 def completePaths(valves, paths, knownPaths, complete, flowRates, pressureCache, maxLength,
-                  cachedPaths={}):
+                  cachedPaths):
     newKnownPaths = []
-    print(len(pressureCache), len(knownPaths))
-    # print(pressureCache)
 
     if len(knownPaths) == 0:
         return complete
@@ -115,10 +140,8 @@ def calcPressure(flowRates, path, steps, debug=False):
 
 
 def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache, maxLength,
-                   cachedPaths={}):
+                   cachedPaths):
     newKnownPaths = []
-    print(len(pressureCache), len(knownPaths), len(complete))
-    # print(pressureCache)
 
     if len(knownPaths) == 0:
         return complete
@@ -128,21 +151,24 @@ def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache
             complete.append(knownPath.copy())
             continue
 
-        # vis = ",".join(sorted(set([valve for valve in knownPath if valve != "__"])))
-        # pres = calcPressure(flowRates, knownPath, maxLength)
-        # if pres < pressureCache.get(vis, 0):
-        #     continue
+        op = False
+        if knownPath[-1][0] != "__" and knownPath[-1][1] != "__":
+            op = True
+        vis = ";".join(sorted(set([v[0] for v in knownPath]))) + str(op)
+        pres = calcPressureB(flowRates, knownPath, maxLength)
+        if pres < pressureCache.get(vis, 0):
+            continue
 
         isComplete = True
         for valve in valves:
 
             if list(valve) not in knownPath:
-                newKnownPathMe = [val[0] for val in knownPath]
-                newKnownPathEle = [val[1] for val in knownPath]
-
                 # only go the path if the target valve has a flow rate
                 if flowRates[valve[0]] == 0 or flowRates[valve[1]] == 0:
                     continue
+
+                newKnownPathMe = [val[0] for val in knownPath]
+                newKnownPathEle = [val[1] for val in knownPath]
 
                 startMe = [val[0] for val in knownPath if val[0] != "__"][-1]
                 startEle = [val[1] for val in knownPath if val[1] != "__"][-1]
@@ -168,30 +194,16 @@ def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache
                 newKnownPathMe = newKnownPathMe + ["__"] * (length - len(newKnownPathMe))
                 newKnownPathEle = newKnownPathEle + ["__"] * (length - len(newKnownPathEle))
                 newKnownPath = list(map(list, zip(newKnownPathMe, newKnownPathEle)))
-                #
-                # testPath = [["AA", "AA"], ["__", "DD"], ["JJ", "__"], ["__", "__"],
-                #             ["__", "__"], ["BB", "HH"], ["CC", "__"],
-                #             ["__", "__"], ["__", "EE"]]
-                #
-                # try:
-                #     if newKnownPath[0] == testPath[0] and newKnownPath[1] == testPath[1] and \
-                #             newKnownPath[2] == testPath[2] and newKnownPath[3] == testPath[3] and \
-                #             newKnownPath[4] == testPath[4] and newKnownPath[5] == testPath[5]:
-                #         print("bla")
-                # except IndexError:
-                #     pass
-
-                visited = ";".join(sorted(set(newKnownPathMe))) #+ ";".join(sorted(set(
-                # newKnownPathEle)))
 
                 onPoint = False
                 if newKnownPathMe[-1] != "__" and newKnownPathEle[-1] != "__":
                     onPoint = True
 
+                visitedMe = ";".join(sorted(set(newKnownPathMe))) + str(onPoint)
                 pressure = calcPressureB(flowRates, newKnownPath, maxLength)
 
-                if pressure > pressureCache.get((visited, onPoint), 0):
-                    pressureCache[(visited, onPoint)] = pressure
+                if pressure > pressureCache.get(visitedMe, 0):
+                    pressureCache[visitedMe] = pressure
                     newKnownPaths.append(newKnownPath)
 
                 isComplete = False
@@ -202,18 +214,16 @@ def completePathsB(valves, paths, knownPaths, complete, flowRates, pressureCache
     return completePathsB(valves, paths, newKnownPaths, complete, flowRates, pressureCache,
                           maxLength=maxLength, cachedPaths=cachedPaths)
 
-def calcPressureB(flowRates, path, steps, noteSamePosition=True):
+
+def calcPressureB(flowRates, path, steps):
     pressure = 0
     posMe = 0
     posEle = 0
     visitedValves = ["AA"]
 
-    samePositition = 0
     for t in range(steps):
         pressurePerMinute = sum([flowRates[valve] for valve in visitedValves if valve != "__"])
         pressure += pressurePerMinute
-
-        # print(t, pressurePerMinute)
 
         try:
             if path[posMe][0] in visitedValves or path[posMe][0] == "__":
@@ -235,44 +245,16 @@ def calcPressureB(flowRates, path, steps, noteSamePosition=True):
 
     return pressure
 
+
 def puzzleA(lines):
-    paths = {}
-    flowRates = {}
-    valves = []
-
-    for line in lines:
-        flowRate = list(map(int, re.findall('[-+]?[0-9]+', line)))[0]
-        valve = line.strip().split("has flow")[0].split()[1].strip()
-        flowRates[valve] = flowRate
-        valves.append(valve)
-        try:
-            nextValves = line.strip().split("to valves")[1].strip().split(", ")
-        except IndexError:
-            nextValves = [line.strip().split("to valve")[1].strip()]
-
-        paths[valve] = nextValves
-
-    cachedPaths = {}
-    for v1 in valves:
-        for v2 in valves:
-            newPath = dijkstraHeap(paths, startPos=v1, stopPos=v2)
-            inBetween = ["__"] * (len(newPath) - 2)
-            inBetween.append(newPath[-1])
-            cachedPaths[(v1, v2)] = inBetween
-
-    highestPressure = 0
+    paths, flowRates, valves, cachedPaths = parse(lines)
     complete = []
     knownPaths = [["AA"]]
     pressureCache = {}
-    for completePath in completePaths(valves, paths, knownPaths, complete, flowRates, pressureCache,
-                                      maxLength=30, cachedPaths=cachedPaths):
+    completePaths(valves, paths, knownPaths, complete, flowRates, pressureCache, maxLength=30,
+                  cachedPaths=cachedPaths)
 
-        pressure = calcPressure(flowRates, completePath, steps=30, debug=False)
-
-        if pressure > highestPressure:
-            highestPressure = pressure
-
-    return highestPressure
+    return max(pressureCache.values())
 
 
 def puzzleB(lines):
@@ -306,30 +288,14 @@ def puzzleB(lines):
             inBetween.append(newPath[-1])
             cachedPaths[(v1, v2)] = inBetween
 
-    highestPressure = 0
     complete = []
     knownPaths = [[["AA", "AA"]]]
     pressureCache = {}
 
-    # testPath = [["AA", "AA"], ["__", "DD"], ["JJ", "__"], ["__", "__"],
-    #             ["__", "__"], ["BB", "HH"], ["CC", "__"],
-    #             ["__", "__"], ["__", "EE"]]
-    # pressure = calcPressureB(flowRates, testPath, steps=26)
-    # return pressure
+    completePathsB(valvePairs, paths, knownPaths, complete, flowRates, pressureCache,
+                   maxLength=26, cachedPaths=cachedPaths)
 
-
-    result = completePathsB(valvePairs, paths, knownPaths, complete, flowRates,
-                            pressureCache, maxLength=26, cachedPaths=cachedPaths)
-
-        # pressure = calcPressureB(flowRates, completePath, steps=26)
-        #
-        # if pressure > highestPressure:
-        #     highestPressure = pressure
-
-    maxPressure = max(pressureCache.values())
-    print([key for key, value in pressureCache.items() if value == maxPressure])
-
-    return maxPressure
+    return max(pressureCache.values())
 
 
 if __name__ == '__main__':
@@ -343,10 +309,11 @@ if __name__ == '__main__':
 
     start = datetime.now()
     a = puzzleA(inputLines)
-    # b = puzzleB(inputLines)
-    stop = datetime.now()
+    b = puzzleB(inputLines)
     print(a)
-    # print(b)
+    print(b)
+
+    stop = datetime.now()
     print("time: {0}".format(stop - start))
     # assert a == 2265
     # assert b == 2811
