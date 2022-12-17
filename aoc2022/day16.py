@@ -88,7 +88,7 @@ def completePaths(valves, paths, knownPaths, complete, flowRates, pressureCache,
             if valve not in knownPath:
                 newKnownPath = knownPath.copy()
 
-                # only go the path if the target valve has a flow rat
+                # only go the path if the target valve has a flow rate
                 if flowRates[valve] == 0:
                     continue
 
