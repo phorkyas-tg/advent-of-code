@@ -97,10 +97,8 @@ def moveShape(command, shape, board):
 
 def getHash(board, shapeIndex, commandIndex):
     y = max([pos[1] for pos in board.keys()])
-    hashString = "{0}|{1}".format(shapeIndex, commandIndex)
-    for x in range(7):
-        hashString += board.get((x, y), ".")
-    return hashString, y
+    hashValue = (shapeIndex, commandIndex)
+    return hashValue, y
 
 
 def puzzleA(lines):
@@ -140,10 +138,11 @@ def puzzleB(lines):
     extraHeight = 0
     extraRocks = 0
     commandRollOver = False
+    rockTarget = 1000000000000
 
-    while rockCount + extraRocks < 1000000000000:
+    while rockCount + extraRocks < rockTarget:
         for commandIndex, command in enumerate(commands):
-            if rockCount + extraRocks >= 1000000000000:
+            if rockCount + extraRocks >= rockTarget:
                 break
 
             if rested:
@@ -157,19 +156,19 @@ def puzzleB(lines):
                 if not commandRollOver:
                     continue
 
-                hashString, height = getHash(board, shapeIndex, commandIndex)
+                hashValue, height = getHash(board, shapeIndex, commandIndex)
 
-                if hashString in cache:
-                    lastHeight, lastRockCount = cache[hashString]
+                if hashValue in cache:
+                    lastHeight, lastRockCount = cache[hashValue]
 
                     deltaHeight = height - lastHeight
                     deltaRockCount = rockCount - lastRockCount
 
-                    repeat = (1000000000000 - (rockCount + extraRocks)) // rockCount
+                    repeat = (rockTarget - (rockCount + extraRocks)) // rockCount
                     extraRocks += repeat * deltaRockCount
                     extraHeight += repeat * deltaHeight
 
-                cache[hashString] = (height, rockCount)
+                cache[hashValue] = (height, rockCount)
         commandRollOver = True
 
     height = max([pos[1] for pos in board.keys()]) + 1
