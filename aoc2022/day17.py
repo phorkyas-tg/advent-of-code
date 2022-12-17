@@ -108,9 +108,9 @@ def puzzleA(lines):
 
     rested = True
     shape = {}
-    rocksCount = 0
+    pieceCount = 0
 
-    while rocksCount < 2022:
+    while pieceCount < 2022:
         for command in commands:
             if rested:
                 shape = initShape(shapeIndex, board)
@@ -118,8 +118,8 @@ def puzzleA(lines):
             rested, shape = moveShape(command, shape, board)
             if rested:
                 shapeIndex = (shapeIndex + 1) % 5
-                rocksCount += 1
-                if rocksCount >= 2022:
+                pieceCount += 1
+                if pieceCount >= 2022:
                     break
 
     return max([pos[1] for pos in board.keys()]) + 1
@@ -132,17 +132,17 @@ def puzzleB(lines):
 
     rested = True
     shape = {}
-    rockCount = 0
+    pieceCount = 0
     cache = {}
 
     extraHeight = 0
-    extraRocks = 0
+    extraPieces = 0
     commandRollOver = False
-    rockTarget = 1000000000000
+    pieceTarget = 1000000000000
 
-    while rockCount + extraRocks < rockTarget:
+    while pieceCount + extraPieces < pieceTarget:
         for commandIndex, command in enumerate(commands):
-            if rockCount + extraRocks >= rockTarget:
+            if pieceCount + extraPieces >= pieceTarget:
                 break
 
             if rested:
@@ -151,7 +151,7 @@ def puzzleB(lines):
             rested, shape = moveShape(command, shape, board)
             if rested:
                 shapeIndex = (shapeIndex + 1) % 5
-                rockCount += 1
+                pieceCount += 1
 
                 if not commandRollOver:
                     continue
@@ -159,16 +159,16 @@ def puzzleB(lines):
                 hashValue, height = getHash(board, shapeIndex, commandIndex)
 
                 if hashValue in cache:
-                    lastHeight, lastRockCount = cache[hashValue]
+                    lastHeight, lastPieceCount = cache[hashValue]
 
                     deltaHeight = height - lastHeight
-                    deltaRockCount = rockCount - lastRockCount
+                    deltaPieceCount = pieceCount - lastPieceCount
 
-                    repeat = (rockTarget - (rockCount + extraRocks)) // rockCount
-                    extraRocks += repeat * deltaRockCount
+                    repeat = (pieceTarget - (pieceCount + extraPieces)) // pieceCount
+                    extraPieces += repeat * deltaPieceCount
                     extraHeight += repeat * deltaHeight
 
-                cache[hashValue] = (height, rockCount)
+                cache[hashValue] = (height, pieceCount)
         commandRollOver = True
 
     height = max([pos[1] for pos in board.keys()]) + 1
