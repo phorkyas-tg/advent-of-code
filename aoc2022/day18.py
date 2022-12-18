@@ -7,26 +7,22 @@ def getAdjacent(pos, cubes, maxX, maxY, maxZ):
     adjacent = []
     for d in (-1, 1):
         posX = pos[0] + d
-        if posX < -1 or posX > maxX:
-            continue
+        if -1 <= posX <= maxX:
+            newPos = (posX, pos[1], pos[2])
+            if newPos not in cubes:
+                adjacent.append(newPos)
 
-        newPos = (posX, pos[1], pos[2])
-        if newPos not in cubes:
-            adjacent.append(newPos)
-    for d in (-1, 1):
         posY = pos[1] + d
-        if posY < -1 or posY > maxY:
-            continue
-        newPos = (pos[0], posY, pos[2])
-        if newPos not in cubes:
-            adjacent.append(newPos)
-    for d in (-1, 1):
+        if -1 <= posY <= maxY:
+            newPos = (pos[0], posY, pos[2])
+            if newPos not in cubes:
+                adjacent.append(newPos)
+
         posZ = pos[2] + d
-        if posZ < -1 or posZ > maxZ:
-            continue
-        newPos = (pos[0], pos[1], posZ)
-        if newPos not in cubes:
-            adjacent.append(newPos)
+        if -1 <= posZ <= maxZ:
+            newPos = (pos[0], pos[1], posZ)
+            if newPos not in cubes:
+                adjacent.append(newPos)
     return adjacent
 
 
