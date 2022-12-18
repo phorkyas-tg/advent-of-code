@@ -7,7 +7,7 @@ def getAdjacent(pos, cubes, maxX, maxY, maxZ):
     adjacent = []
     for d in (-1, 1):
         posX = pos[0] + d
-        if posX < -2 or posX > maxX:
+        if posX < -1 or posX > maxX:
             continue
 
         newPos = (posX, pos[1], pos[2])
@@ -15,14 +15,14 @@ def getAdjacent(pos, cubes, maxX, maxY, maxZ):
             adjacent.append(newPos)
     for d in (-1, 1):
         posY = pos[1] + d
-        if posY < -2 or posY > maxY:
+        if posY < -1 or posY > maxY:
             continue
         newPos = (pos[0], posY, pos[2])
         if newPos not in cubes:
             adjacent.append(newPos)
     for d in (-1, 1):
         posZ = pos[2] + d
-        if posZ < -2 or posZ > maxZ:
+        if posZ < -1 or posZ > maxZ:
             continue
         newPos = (pos[0], pos[1], posZ)
         if newPos not in cubes:
@@ -39,9 +39,9 @@ def dijkstraHeap(cubes, maxX, maxY, maxZ, startPos):
     unvisited = {}
     dist = {}
 
-    for x in range(-2, maxX + 1):
-        for y in range(-2, maxY + 1):
-            for z in range(-2, maxZ + 1):
+    for x in range(-1, maxX + 1):
+        for y in range(-1, maxY + 1):
+            for z in range(-1, maxZ + 1):
                 dist[(x, y, z)] = None
                 unvisited[(x, y, z)] = "#"
 
