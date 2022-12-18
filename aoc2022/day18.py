@@ -79,7 +79,6 @@ def parseSurfaces(pos):
 
 
 def puzzleA(lines):
-    cubes = []
     allAreas = {}
     for line in lines:
         pos = tuple(map(int, line.strip().split(",")))
@@ -87,20 +86,12 @@ def puzzleA(lines):
         for area in surfaces:
             allAreas.setdefault(area, 0)
             allAreas[area] += 1
-        cubes.append((pos, surfaces))
 
-    sideCount = 0
-    for pos, surfaces in cubes:
-        for area in surfaces:
-            if allAreas[area] == 1:
-                sideCount += 1
-
-    return sideCount
+    return sum([1 for value in allAreas.values() if value == 1])
 
 
 def puzzleB(lines):
     cubes = {}
-    allAreas = {}
 
     for line in lines:
         pos = tuple(map(int, line.strip().split(",")))
@@ -113,21 +104,14 @@ def puzzleB(lines):
     dist = dijkstraHeap(cubes, maxX, maxY, maxZ, (0, 0, 0))
     positions = [key for key, value in dist.items() if value is None and value not in cubes]
 
-    newCubes = []
+    allAreas = {}
     for pos in positions:
         surfaces = parseSurfaces(pos)
         for area in surfaces:
             allAreas.setdefault(area, 0)
             allAreas[area] += 1
-        newCubes.append((pos, surfaces))
 
-    sideCount = 0
-    for pos, surfaces in newCubes:
-        for area in surfaces:
-            if allAreas[area] == 1:
-                sideCount += 1
-
-    return sideCount
+    return sum([1 for value in allAreas.values() if value == 1])
 
 
 if __name__ == '__main__':
