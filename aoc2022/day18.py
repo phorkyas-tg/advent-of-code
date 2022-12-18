@@ -102,7 +102,7 @@ def puzzleB(lines):
     maxZ = max([pos[2] for pos in cubes.keys()]) + 1
 
     dist = dijkstraHeap(cubes, maxX, maxY, maxZ, (0, 0, 0))
-    positions = [key for key, value in dist.items() if value is None and value not in cubes]
+    positions = [key for key, value in dist.items() if value is None]
 
     allAreas = {}
     for pos in positions:
