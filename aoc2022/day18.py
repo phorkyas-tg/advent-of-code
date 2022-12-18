@@ -82,8 +82,7 @@ def puzzleA(lines):
     allAreas = {}
     for line in lines:
         pos = tuple(map(int, line.strip().split(",")))
-        surfaces = parseSurfaces(pos)
-        for area in surfaces:
+        for area in parseSurfaces(pos):
             allAreas.setdefault(area, 0)
             allAreas[area] += 1
 
@@ -106,8 +105,7 @@ def puzzleB(lines):
 
     allAreas = {}
     for pos in positions:
-        surfaces = parseSurfaces(pos)
-        for area in surfaces:
+        for area in parseSurfaces(pos):
             allAreas.setdefault(area, 0)
             allAreas[area] += 1
 
