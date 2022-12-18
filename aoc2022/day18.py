@@ -63,15 +63,29 @@ def dijkstraHeap(cubes, maxX, maxY, maxZ, startPos):
 
 
 def parseSurfaces(pos):
-    return [",".join(map(str, [pos[0], pos[0], pos[1], pos[1] + 1, pos[2], pos[2] + 1])),
-            ",".join(map(str, [pos[0] + 1, pos[0] + 1, pos[1], pos[1] + 1, pos[2],
-                               pos[2] + 1])),
-            ",".join(map(str, [pos[0], pos[0] + 1, pos[1], pos[1], pos[2], pos[2] + 1])),
-            ",".join(map(str, [pos[0], pos[0] + 1, pos[1] + 1, pos[1] + 1, pos[2],
-                               pos[2] + 1])),
-            ",".join(map(str, [pos[0], pos[0] + 1, pos[1], pos[1] + 1, pos[2], pos[2]])),
-            ",".join(map(str, [pos[0], pos[0] + 1, pos[1], pos[1] + 1, pos[2] + 1,
-                               pos[2] + 1]))]
+    return [",".join(map(str, [pos[0], pos[0],
+                               pos[1], pos[1] + 1,
+                               pos[2], pos[2] + 1])),
+
+            ",".join(map(str, [pos[0] + 1, pos[0] + 1,
+                               pos[1], pos[1] + 1,
+                               pos[2], pos[2] + 1])),
+
+            ",".join(map(str, [pos[0], pos[0] + 1,
+                               pos[1], pos[1],
+                               pos[2], pos[2] + 1])),
+
+            ",".join(map(str, [pos[0], pos[0] + 1,
+                               pos[1] + 1, pos[1] + 1,
+                               pos[2], pos[2] + 1])),
+
+            ",".join(map(str, [pos[0], pos[0] + 1,
+                               pos[1], pos[1] + 1,
+                               pos[2], pos[2]])),
+
+            ",".join(map(str, [pos[0], pos[0] + 1,
+                               pos[1], pos[1] + 1,
+                               pos[2] + 1, pos[2] + 1]))]
 
 
 def puzzleA(lines):
