@@ -7,16 +7,16 @@ def puzzleA(lines):
     queue = deque([])
     init = []
     for i, line in enumerate(lines):
-        numb = int(line.strip())
-        queue.append((numb, i))
-        init.append(numb)
+        number = int(line.strip())
+        queue.append((number, i))
+        init.append(number)
 
-    for i, numb in enumerate(init):
-        numbIndex = queue.index((numb, i))
-        queue.rotate(-numbIndex)
+    for i, number in enumerate(init):
+        numberIndex = queue.index((number, i))
+        queue.rotate(-numberIndex)
         queue.popleft()
-        queue.rotate(-numb)
-        queue.appendleft((numb, True))
+        queue.rotate(-number)
+        queue.appendleft((number, True))
 
     i0 = queue.index((0, True))
     queue.rotate(-i0)
@@ -37,17 +37,17 @@ def puzzleB(lines):
     key = 811589153
 
     for i, line in enumerate(lines):
-        numb = int(line.strip()) * key
-        queue.append((numb, i))
-        init.append(numb)
+        number = int(line.strip()) * key
+        queue.append((number, i))
+        init.append(number)
 
     for loop in range(10):
-        for i, numb in enumerate(init):
-            numbIndex = queue.index((numb, i))
-            queue.rotate(-numbIndex)
+        for i, number in enumerate(init):
+            numberIndex = queue.index((number, i))
+            queue.rotate(-numberIndex)
             queue.popleft()
-            queue.rotate(-numb)
-            queue.appendleft((numb, i if loop < 9 else True))
+            queue.rotate(-number)
+            queue.appendleft((number, i if loop < 9 else True))
 
     i0 = queue.index((0, True))
     queue.rotate(-i0)
