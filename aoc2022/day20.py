@@ -14,9 +14,9 @@ def puzzleA(lines):
     for i, numb in enumerate(init):
         numbIndex = queue.index((numb, i))
         queue.rotate(-numbIndex)
-        current, __ = queue.popleft()
+        queue.popleft()
         queue.rotate(-numb)
-        queue.appendleft((current, True))
+        queue.appendleft((numb, True))
 
     i0 = queue.index((0, True))
     queue.rotate(-i0)
@@ -45,9 +45,9 @@ def puzzleB(lines):
         for i, numb in enumerate(init):
             numbIndex = queue.index((numb, i))
             queue.rotate(-numbIndex)
-            current, __ = queue.popleft()
+            queue.popleft()
             queue.rotate(-numb)
-            queue.appendleft((current, i if loop < 9 else True))
+            queue.appendleft((numb, i if loop < 9 else True))
 
     i0 = queue.index((0, True))
     queue.rotate(-i0)
