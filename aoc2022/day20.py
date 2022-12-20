@@ -77,5 +77,5 @@ if __name__ == '__main__':
     print(a)
     print(b)
     print("time: {0}".format(stop - start))
-    # assert a == 1087
-    # assert b == 0
+    assert a == 1087
+    assert b == 13084440324666
