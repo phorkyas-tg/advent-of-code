@@ -45,18 +45,25 @@ def puzzleB(lines):
     left, right = rootOp.split(" == ")
     right = eval(right)
 
-    i = 0
-    step = 1000000000000
+    humn = 0
+    step = 1
+
+    stepDownOp = ">"
+    stepUpOp = "<"
+    if eval(left) > right:
+        stepDownOp = "<"
+        stepUpOp = ">"
 
     while True:
-        humn = i
         if eval(left) == right:
             return int(humn)
-        if eval(left) < right:
-            i -= step
+        if eval("{0} {1} right".format(left, stepDownOp)):
+            humn -= step
             step /= 10
+        elif eval("{0} {1} right".format(left, stepUpOp)):
+            step *= 10
 
-        i += step
+        humn += step
 
 
 if __name__ == '__main__':
