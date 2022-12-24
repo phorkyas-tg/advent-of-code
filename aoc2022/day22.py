@@ -84,7 +84,7 @@ def move(board, commands, startPos):
     return pos, facing
 
 
-def specialMove(facing, face, pos, newPos):
+def specialMove(facing, face, pos):
     if facing == "R":
         if face == "A":
             # A --> C
@@ -206,7 +206,7 @@ def moveCube(board, commands, startPos):
 
             invalidPos = newPos not in board
             if invalidPos:
-                newPos, newFacing = specialMove(facing, face, pos, newPos)
+                newPos, newFacing = specialMove(facing, face, pos)
 
             if board[newPos] == "#":
                 break
