@@ -1,6 +1,7 @@
 import os
 import re
 from datetime import datetime
+from functools import cache
 
 
 def parseBoard(lines):
@@ -30,6 +31,15 @@ def parseBoard(lines):
     return board, commands, startPos
 
 
+@cache
+def getDim(boardKeys, pos):
+    minRowX = min([p[0] for p in boardKeys if p[1] == pos[1]])
+    maxRowX = max([p[0] for p in boardKeys if p[1] == pos[1]])
+    minRowY = min([p[1] for p in boardKeys if p[0] == pos[0]])
+    maxRowY = max([p[1] for p in boardKeys if p[0] == pos[0]])
+    return minRowX, maxRowX, minRowY, maxRowY
+
+
 def move(board, commands, startPos):
     facing = "R"
     directions = {"R": (1, 0), "L": (-1, 0), "U": (0, -1), "D": (0, 1)}
@@ -47,10 +57,7 @@ def move(board, commands, startPos):
             steps = int(command[:-1])
             turn = command[-1]
 
-        minRowX = min([p[0] for p in board.keys() if p[1] == pos[1]])
-        maxRowX = max([p[0] for p in board.keys() if p[1] == pos[1]])
-        minRowY = min([p[1] for p in board.keys() if p[0] == pos[0]])
-        maxRowY = max([p[1] for p in board.keys() if p[0] == pos[0]])
+        minRowX, maxRowX, minRowY, maxRowY = getDim(tuple(board.keys()), pos)
 
         for s in range(steps):
             direction = directions[facing]
@@ -77,6 +84,87 @@ def move(board, commands, startPos):
     return pos, facing
 
 
+def specialMove(facing, face, pos, newPos):
+    if facing == "R":
+        if face == "A":
+            # A --> C
+            d = pos[1] - 150
+            newPos = (50 + d, 149)
+            newFacing = "U"
+        elif face == "C":
+            # C --> F
+            d = pos[1] - 100
+            newPos = (149, 49 - d)
+            newFacing = "L"
+        elif face == "D":
+            # D --> F
+            d = pos[1] - 50
+            newPos = (100 + d, 49)
+            newFacing = "U"
+        elif face == "F":
+            # F --> C
+            d = pos[1]
+            newPos = (99, 149 - d)
+            newFacing = "L"
+    elif facing == "D":
+        if face == "A":
+            # A --> F
+            d = pos[0]
+            newPos = (100 + d, 0)
+            newFacing = "D"
+        elif face == "C":
+            # C --> A
+            d = pos[0] - 50
+            newPos = (49, 150 + d)
+            newFacing = "L"
+        elif face == "F":
+            # F --> D
+            d = pos[0] - 100
+            newPos = (99, 50 + d)
+            newFacing = "L"
+    elif facing == "L":
+        if face == "A":
+            # A --> E
+            d = pos[1] - 150
+            newPos = (50 + d, 0)
+            newFacing = "D"
+        elif face == "B":
+            # B --> E
+            d = pos[1] - 100
+            newPos = (50, 49 - d)
+            newFacing = "R"
+        elif face == "D":
+            # D --> B
+            d = pos[1] - 50
+            newPos = (d, 100)
+            newFacing = "D"
+        elif face == "E":
+            # E --> B
+            d = pos[1]
+            newPos = (0, 149 - d)
+            newFacing = "R"
+    elif facing == "U":
+        if face == "B":
+            # B --> D
+            d = pos[0]
+            newPos = (50, 50 + d)
+            newFacing = "R"
+        elif face == "E":
+            # E --> A
+            d = pos[0] - 50
+            newPos = (0, 150 + d)
+            newFacing = "R"
+        elif face == "F":
+            # F --> A
+            d = pos[0] - 100
+            newPos = (d, 199)
+            newFacing = "U"
+    else:
+        raise ValueError()
+
+    return newPos, newFacing
+
+
 def moveCube(board, commands, startPos):
     facing = "R"
     directions = {"R": (1, 0), "L": (-1, 0), "U": (0, -1), "D": (0, 1)}
@@ -85,16 +173,21 @@ def moveCube(board, commands, startPos):
              "UR": "R", "UL": "L",
              "DR": "L", "DL": "R"}
 
-    # face number: xmin/max, ymin/max
-    faces = {1: (8, 11, 0, 3),
-             2: (0, 3, 4, 7),
-             3: (4, 7, 4, 7),
-             4: (8, 11, 4, 7),
-             5: (8, 11, 8, 11),
-             6: (12, 15, 8, 11)}
-
-    faceDirections = {"1U": "2D", "1D": "4D", "1R": "6L", "1L": "3D",
-                      "2U": "1D", "2D": "5U", "2R": "3R", "2L": "6U"}
+    def getFace(pos):
+        """
+          E F
+          D
+        B C
+        A
+        """
+        faceCalc = (pos[0] // 50, pos[1] // 50)
+        if faceCalc == (2, 0): return "F"
+        if faceCalc == (1, 0): return "E"
+        if faceCalc == (1, 1): return "D"
+        if faceCalc == (1, 2): return "C"
+        if faceCalc == (0, 2): return "B"
+        if faceCalc == (0, 3): return "A"
+        raise ValueError(pos, faceCalc)
 
     pos = startPos
     for command in commands:
@@ -105,29 +198,21 @@ def moveCube(board, commands, startPos):
             steps = int(command[:-1])
             turn = command[-1]
 
-        minRowX = min([p[0] for p in board.keys() if p[1] == pos[1]])
-        maxRowX = max([p[0] for p in board.keys() if p[1] == pos[1]])
-        minRowY = min([p[1] for p in board.keys() if p[0] == pos[0]])
-        maxRowY = max([p[1] for p in board.keys() if p[0] == pos[0]])
-
-        for s in range(steps):
+        for __ in range(steps):
             direction = directions[facing]
             newPos = (pos[0] + direction[0], pos[1] + direction[1])
+            newFacing = facing
+            face = getFace(pos)
 
-            if facing == "R" and newPos[0] > maxRowX:
-                newPos = (minRowX, newPos[1])
-            elif facing == "L" and newPos[0] < minRowX:
-                newPos = (maxRowX, newPos[1])
-
-            elif facing == "D" and newPos[1] > maxRowY:
-                newPos = (newPos[0], minRowY)
-            elif facing == "U" and newPos[1] < minRowY:
-                newPos = (newPos[0], maxRowY)
+            invalidPos = newPos not in board
+            if invalidPos:
+                newPos, newFacing = specialMove(facing, face, pos, newPos)
 
             if board[newPos] == "#":
                 break
 
             pos = newPos
+            facing = newFacing
 
         if turn is not None:
             facing = turns[facing + turn]
@@ -172,4 +257,4 @@ if __name__ == '__main__':
     print(b)
     print("time: {0}".format(stop - start))
     assert a == 131052
-    # assert b == 0
+    assert b == 4578
