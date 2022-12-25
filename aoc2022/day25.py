@@ -3,20 +3,20 @@ from datetime import datetime
 
 
 def numberToSnafu(n):
-    b = 5
+    base = 5
 
     digits = []
     while n:
-        digits.append(int(n % b))
-        n //= b
+        digits.append(int(n % base))
+        n //= base
 
     snafu = ""
     carryOver = 0
     for d in digits:
         d += carryOver
 
-        carryOver = d // 5
-        d = d % 5
+        carryOver = d // base
+        d = d % base
 
         if d == 3:
             snafu += "="
